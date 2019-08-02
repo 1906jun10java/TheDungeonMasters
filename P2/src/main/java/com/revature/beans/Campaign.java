@@ -15,20 +15,19 @@ public class Campaign {
 	public Campaign(int userId, String campaignName, int currentTurn, int currentRound) {
 		super();
 		this.userId = userId;
-
 		this.campaignName = campaignName;
 		this.currentTurn = currentTurn;
 		this.currentRound = currentRound;
 	}
-	
-	@Column(name="USER_ID")
-	private int userId;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="campaignSequence")
 	@SequenceGenerator(allocationSize=1, name="campaignSequence", sequenceName="SQ_CAMPAIGN_PK")
 	@Column(name="CAMPAIGN_ID")
 	private int campaignId;
+	
+	@Column(name="USER_ID")
+	private int userId;
 	
 	@Column(name="CAMPAIGN_NAME")
 	private String campaignName;
