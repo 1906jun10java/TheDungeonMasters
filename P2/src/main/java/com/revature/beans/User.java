@@ -1,10 +1,16 @@
 package com.revature.beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,6 +38,9 @@ public class User {
 	private String LastName;
 	@Column(name="USER_EMAIL")
 	private String Email;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
+	@JoinTable(name="USER_CAMPAIGNS")
+	private List<Campaign> myCampaigns;
 	
 	
 	public int getUserId() {
