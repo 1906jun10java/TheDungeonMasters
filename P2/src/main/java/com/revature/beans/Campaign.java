@@ -1,10 +1,16 @@
 package com.revature.beans;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -12,9 +18,8 @@ import javax.persistence.Table;
 @Table(name="Campaign")
 public class Campaign {
 
-	public Campaign(int userId, String campaignName, int currentTurn, int currentRound) {
+	public Campaign(String campaignName, int currentTurn, int currentRound) {
 		super();
-		this.userId = userId;
 		this.campaignName = campaignName;
 		this.currentTurn = currentTurn;
 		this.currentRound = currentRound;
@@ -26,9 +31,6 @@ public class Campaign {
 	@Column(name="CAMPAIGN_ID")
 	private int campaignId;
 	
-	@Column(name="USER_ID")
-	private int userId;
-	
 	@Column(name="CAMPAIGN_NAME")
 	private String campaignName;
 	
@@ -38,13 +40,10 @@ public class Campaign {
 	@Column(name="CURRENT_ROUND")
 	private int currentRound;
 	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
+	@JoinTable(name="CAMPAIGN_ENTITIES")
+	private List<ActiveEntity> activeEntities;
 	
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 	public int getCampaignId() {
 		return campaignId;
 	}
@@ -71,7 +70,7 @@ public class Campaign {
 	}
 	@Override
 	public String toString() {
-		return "Campaign [userId=" + userId + ", campaignId=" + campaignId + ", campaignName=" + campaignName
+		return "Campaign [ campaignId=" + campaignId + ", campaignName=" + campaignName
 				+ ", currentTurn=" + currentTurn + ", currentRound=" + currentRound + "]";
 	}
 	

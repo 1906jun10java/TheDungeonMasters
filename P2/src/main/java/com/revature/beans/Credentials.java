@@ -2,6 +2,9 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,9 +15,14 @@ public class Credentials {
 		super();
 		this.password = password;
 	}
-
+	
+	@Id
 	@Column(name="ID")
 	private int id;
+	
+	@OneToOne
+	@MapsId
+	private User user;
 	
 	@Column(name="PASSWORD")
 	private String password;

@@ -19,6 +19,11 @@
 		<!-- defaults to update -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- where are our mapped beans? -->
-		<mapping class="com.revature.beans.Entity"></mapping>
+		<mapping class="com.revature.beans.ActiveEntity"></mapping>
+		<mapping class="com.revature.beans.Campaign"></mapping>
+		<mapping class="com.revature.beans.Credentials"></mapping>
+		<mapping class="com.revature.beans.MonsterVault"></mapping>
+		<mapping class="com.revature.beans.User"></mapping>
+		
 	</session-factory>
 </hibernate-configuration>

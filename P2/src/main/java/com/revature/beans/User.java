@@ -15,13 +15,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name="USER_TABLE")
 public class User {
 	
 	
-	public User(int userId, String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email) {
 		super();
-		this.userId = userId;
 		FirstName = firstName;
 		LastName = lastName;
 		Email = email;
