@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Campaign")
+@Table(name="CAMPAIGN")
 public class Campaign {
 
 	public Campaign(int userId, String campaignName, int currentTurn, int currentRound) {
