@@ -1,5 +1,15 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="USER")
 public class User {
 	
 	
@@ -11,9 +21,16 @@ public class User {
 		Email = email;
 	}
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="userSequence")
+	@SequenceGenerator(allocationSize=1, name="userSequence", sequenceName="SQ_USER_PK")
+	@Column(name="USER_ID")
 	private int userId;
+	@Column(name="USER_FIRST_NAME")
 	private String FirstName;
+	@Column(name="USER_LAST_NAME")
 	private String LastName;
+	@Column(name="USER_EMAIL")
 	private String Email;
 	
 	
