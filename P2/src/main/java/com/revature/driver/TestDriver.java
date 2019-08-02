@@ -17,6 +17,7 @@ public class TestDriver {
 		Session s = sf.openSession();
 		Transaction tx = s.beginTransaction();
 		s.persist(u1);
+		c1.setUser(u1);
 		s.persist(c1);
 		tx.commit();
 		s.close();

@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="CREDENTIALS")
-public class Credentials {
+public class Credentials implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Credentials(String password) {
 		super();
@@ -17,9 +24,6 @@ public class Credentials {
 	}
 	
 	@Id
-	@Column(name="ID")
-	private int id;
-	
 	@OneToOne
 	@MapsId
 	private User user;
@@ -27,12 +31,6 @@ public class Credentials {
 	@Column(name="PASSWORD")
 	private String password;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -42,7 +40,7 @@ public class Credentials {
 	
 	@Override
 	public String toString() {
-		return "Credentials [id=" + id + ", password=" + password + "]";
+		return "Credentials [user= " + user + " password=" + password + "]";
 	}
 	
 }
