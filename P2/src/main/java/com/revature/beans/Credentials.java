@@ -8,9 +8,8 @@ import javax.persistence.Table;
 @Table(name="CREDENTIALS")
 public class Credentials {
 
-	public Credentials(int id, String password) {
+	public Credentials(String password) {
 		super();
-		this.id = id;
 		this.password = password;
 	}
 
