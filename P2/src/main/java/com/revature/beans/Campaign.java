@@ -1,5 +1,11 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Campaign")
 public class Campaign {
 
 	public Campaign(int userId, int campaignId, String campaignName, int currentTurn, int currentRound) {
@@ -10,11 +16,22 @@ public class Campaign {
 		this.currentTurn = currentTurn;
 		this.currentRound = currentRound;
 	}
+	
+	@Column(name="USER_ID")
 	private int userId;
+	
+	@Column(name="CAMPAIGN_ID")
 	private int campaignId;
+	
+	@Column(name="CAMPAIGN_NAME")
 	private String campaignName;
+	
+	@Column(name="CURRENT_TURN")
 	private int currentTurn;
+	
+	@Column(name="CURRENT_ROUND")
 	private int currentRound;
+	
 	
 	public int getUserId() {
 		return userId;

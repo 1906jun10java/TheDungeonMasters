@@ -1,5 +1,11 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="CREDENTIALS")
 public class Credentials {
 
 	public Credentials(int id, String password) {
@@ -8,7 +14,10 @@ public class Credentials {
 		this.password = password;
 	}
 
+	@Column(name="ID")
 	private int id;
+	
+	@Column(name="PASSWORD")
 	private String password;
 	
 	public int getId() {
