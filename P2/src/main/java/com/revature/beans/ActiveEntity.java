@@ -33,4 +33,90 @@ public class ActiveEntity {
 	private int initiativeTotal;
 	@Column(name="ACT_TYPE")  //will be either player or monster
 	private String type;
+	
+	public ActiveEntity(int campaignId, String name, int hp, int currentHp, int armorClass, int initiativeMod,
+			int initiativeTotal, String type) {
+		super();
+		this.campaignId = campaignId;
+		this.name = name;
+		this.hp = hp;
+		this.currentHp = currentHp;
+		this.armorClass = armorClass;
+		this.initiativeMod = initiativeMod;
+		this.initiativeTotal = initiativeTotal;
+		this.type = type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getCampaignId() {
+		return campaignId;
+	}
+
+	public void setCampaignId(int campaignId) {
+		this.campaignId = campaignId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public int getCurrentHp() {
+		return currentHp;
+	}
+
+	public void setCurrentHp(int currentHp) {
+		this.currentHp = currentHp;
+	}
+
+	public int getArmorClass() {
+		return armorClass;
+	}
+
+	public void setArmorClass(int armorClass) {
+		this.armorClass = armorClass;
+	}
+
+	public int getInitiativeMod() {
+		return initiativeMod;
+	}
+
+	public void setInitiativeMod(int initiativeMod) {
+		this.initiativeMod = initiativeMod;
+	}
+
+	public int getInitiativeTotal() {
+		return initiativeTotal;
+	}
+
+	public void setInitiativeTotal(int initiativeTotal) {
+		this.initiativeTotal = initiativeTotal;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 }

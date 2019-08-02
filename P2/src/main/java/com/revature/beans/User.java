@@ -14,14 +14,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.revature.util.ConnectionUtil;
+
 @Entity
 @Table(name="USER")
 public class User {
 	
-	
-	public User(int userId, String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email) {
 		super();
-		this.userId = userId;
 		FirstName = firstName;
 		LastName = lastName;
 		Email = email;
@@ -71,6 +75,20 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
 				+ "]";
+	}
+	
+	public static void main(String[] args) {
+		
+		User u1 = new User("Aaron","Zee","whatever@gmail.org");
+		Campaign c1 = new Campaign(u1.getUserId(), "CAMP PAYNE", 0, 3);
+		SessionFactory sf = ConnectionUtil.getSessionFactory();
+		Session s = sf.openSession();
+		Transaction tx = s.beginTransaction();
+		
+		s.persist(u1);
+		s.persist(c1);
+		tx.commit();
+		s.close();
 	}
 	
 }

@@ -2,16 +2,20 @@ package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Campaign")
 public class Campaign {
 
-	public Campaign(int userId, int campaignId, String campaignName, int currentTurn, int currentRound) {
+	public Campaign(int userId, String campaignName, int currentTurn, int currentRound) {
 		super();
 		this.userId = userId;
-		this.campaignId = campaignId;
+
 		this.campaignName = campaignName;
 		this.currentTurn = currentTurn;
 		this.currentRound = currentRound;
@@ -20,6 +24,9 @@ public class Campaign {
 	@Column(name="USER_ID")
 	private int userId;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="campaignSequence")
+	@SequenceGenerator(allocationSize=1, name="campaignSequence", sequenceName="SQ_CAMPAIGN_PK")
 	@Column(name="CAMPAIGN_ID")
 	private int campaignId;
 	
