@@ -21,6 +21,11 @@
               <span data-feather="plus-circle"></span>
             </a>
           </h6>
+          <ul class="nav flex-column">
+            <li *ngFor="let campaign of campaigns">
+              <a class="nav-link" href="#">{{ campaign['campaignName'] }}</a>
+            </li>
+          </ul>
         </div>
       </nav>
 
