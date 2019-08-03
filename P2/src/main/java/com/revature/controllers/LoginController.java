@@ -1,8 +1,9 @@
 package com.revature.controllers;
 
+import java.io.StringReader;
 import java.util.List;
 
-import org.json.JSONObject;
+import javax.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +41,15 @@ public class LoginController{
 	}
 	
 	@PostMapping
-	public ResponseEntity<Boolean> login(@RequestBody JSONObject json){
+	public ResponseEntity<Boolean> login(@RequestBody String rawJson){
 		ResponseEntity<Boolean> response = null;
+		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
+		JsonObject json = jsonReader.readObject();
+		String email = json.getString("email");
+		String password = json.getString("password");
 		boolean test = false;
-		System.out.println(json.toString());
-		String email = null;
-		String password = null;
+		System.out.println(email);
+		System.out.println(password);
 		try {
 			test = ls.loginTest(email, password);
 			response = new ResponseEntity<>(test,HttpStatus.OK);
