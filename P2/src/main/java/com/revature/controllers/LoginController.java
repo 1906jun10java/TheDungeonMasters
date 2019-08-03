@@ -41,21 +41,19 @@ public class LoginController{
 	}
 	
 	@PostMapping
-	public ResponseEntity<Boolean> login(@RequestBody String rawJson){
-		ResponseEntity<Boolean> response = null;
+	public ResponseEntity<User> login(@RequestBody String rawJson){
+		ResponseEntity<User> response = null;
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
 		String email = json.getString("email");
 		String password = json.getString("password");
-		boolean test = false;
-		System.out.println(email);
-		System.out.println(password);
+		User u  = null;
 		try {
-			test = ls.loginTest(email, password);
-			response = new ResponseEntity<>(test,HttpStatus.OK);
+			u = ls.loginTest(email, password);
+			response = new ResponseEntity<>(u ,HttpStatus.OK);
 		}catch(Exception e) {
-			response = new ResponseEntity<>(test,HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}

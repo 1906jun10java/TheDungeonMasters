@@ -19,18 +19,18 @@ public class LoginService {
 		this.loginDAO =loginDAO;
 	}
 	
-	public boolean loginTest(String email, String password) {
+	public User loginTest(String email, String password) {
 		List<User> userList = new ArrayList<>(); 
 		userList = loginDAO.getAllUsers();
 		for(User u : userList ) {
 			if(email.equals(u.getEmail())) {
 				Credentials c = loginDAO.getCredentials(u.getUserId());
 				if(c.getPassword().equals(password)) {
-					return true;
+					return u;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public List<User> gimmeUsers(){
