@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-
-=======
  <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -22,7 +19,7 @@
       </div>
     </div>
   </div>
->>>>>>> startNewencounter
+
     
     <div class="container-fluid">
         <div class="row">
@@ -35,50 +32,27 @@
                     </a>
                 </h6>
               <ul class="nav flex-column">
-<<<<<<< HEAD
-                <li class="nav-item">
-                  <a class="nav-link" href="#">New</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Resume</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Remove</a>
-                </li>
-=======
                 <li *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" data-toggle="modal" data-target="#entityModal">
                   <button type="button" data-toggle="modal" data-target="#entityModal">
                     <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} AC = {{entity.armorClass}}
                   </button>
->>>>>>> startNewencounter
               </ul>
              
             </div>
           </nav>
           <main role="main">
-<<<<<<< HEAD
-            <div class="text-center mb-4">
-                <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
-            </div>
-            <app-active-entity></app-active-entity>
-            <form>
-=======
+
               <div class="text-center mb-4">
                 <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
               </div>
               <app-active-entity></app-active-entity>
               <form>
->>>>>>> startNewencounter
                 <input type="number" class="form-control" width="75%" placeholder="0000">
                 <button (click)="checkTarget()">Hit/Heal</button>   
                 <button (click)="addEffect()">Add Effect</button>
                 <button (click)="removeEffect()">Remove Effect</button>
-<<<<<<< HEAD
-            </form>
-        </main>
-=======
+
               </form>
           </main>
->>>>>>> startNewencounter
         </div>
     </div>
