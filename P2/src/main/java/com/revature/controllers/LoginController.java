@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Credentials;
 import com.revature.beans.User;
 import com.revature.services.CampaignService;
@@ -27,7 +26,6 @@ import com.revature.services.LoginService;
 public class LoginController{
 	private LoginService ls;
 	private CampaignService cs;
-	ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
 	public LoginController(LoginService ls, CampaignService cs) {
