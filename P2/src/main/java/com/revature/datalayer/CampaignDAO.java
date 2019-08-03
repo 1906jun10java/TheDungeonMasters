@@ -28,8 +28,20 @@ public class CampaignDAO {
 		this.sf = sf;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Campaign> getAllCampaigns(){
+		return sf.getCurrentSession().createQuery("from Campaign").getResultList();
+	}
+	
 	public Campaign getCampaignById(int id) {
 		return sf.getCurrentSession().get(Campaign.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Campaign> getCampaignsByUserId(int id){
+		Query<Campaign> query = sf.getCurrentSession().createQuery("from Campaign where USER_ID = :id ");
+		query.setParameter("id", id);
+		return query.list();
 	}
 
 	public List<Campaign> getCampaignsByUser(User u){
@@ -56,6 +68,10 @@ public class CampaignDAO {
 	//ManyToOnes will have been set before being passed in
 	public void addCampaign(Campaign c) {
 		sf.getCurrentSession().persist(c);
+	}
+	
+	public void updateCampaign(Campaign c) {
+		sf.getCurrentSession().saveOrUpdate(c);
 	}
 	
 }
