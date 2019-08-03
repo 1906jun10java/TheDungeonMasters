@@ -1,0 +1,41 @@
+
+
+    
+    <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Turn Order</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">New</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Resume</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Remove</a>
+                </li>
+              </ul>
+             
+            </div>
+          </nav>
+          <main role="main">
+            <div class="text-center mb-4">
+                <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
+            </div>
+            <app-active-entity></app-active-entity>
+            <form>
+                <input type="number" class="form-control" width="75%" placeholder="0000">
+                <button (click)="checkTarget()">Hit/Heal</button>   
+                <button (click)="addEffect()">Add Effect</button>
+                <button (click)="removeEffect()">Remove Effect</button>
+            </form>
+        </main>
+        </div>
+    </div>
