@@ -41,8 +41,8 @@ public class CampaignDAO {
 		return q.getResultList();
 	}
 	
-	//This, and the Active Entities DAO, will assume that the respective ManyToOnes will have been set
-	//before being passed in
+	//This, and the Active Entities DAO, will assume that the respective 
+	//ManyToOnes will have been set before being passed in
 	public void createCampaign(Campaign c) {
 		sf.getCurrentSession().persist(c);
 	}

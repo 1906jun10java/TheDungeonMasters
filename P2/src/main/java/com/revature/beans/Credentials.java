@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +25,7 @@ public class Credentials implements Serializable {
 	
 	@Id
 	@OneToOne
-	@MapsId
+	@JoinColumn(name="USER_ID")
 	private User user;
 	
 	@Column(name="PASSWORD")
