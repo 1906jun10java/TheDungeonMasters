@@ -44,6 +44,7 @@ public class MonsterVault {
 		//These are used for ActiveEntities
 		this.currentHp = 0;
 		this.initiativeTotal = 0;
+		this.type = "monster";
 	}
 
 	public int getId() {

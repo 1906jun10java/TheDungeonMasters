@@ -19,11 +19,9 @@ public class ActiveEntity {
 	@SequenceGenerator(allocationSize = 1, name = "activeEntitySequence", sequenceName = "SQ_ACTIVE_ENTITY_PK")
 	@Column(name = "ACT_ENTITY_ID")
 	private int id;
-
 	@ManyToOne
 	@JoinColumn(name = "CAMPAIGN_ID")
 	private Campaign containingCampaign;
-
 	@Column(name = "ACT_ENTITY_NAME")
 	private String name;
 	@Column(name = "ACT_HIT_POINTS")

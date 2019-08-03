@@ -51,6 +51,7 @@ public class CampaignController {
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
+		
 		//We will need to get the current User, or at least the user ID.
 		String cName = json.getString("campaignName");
 		int cRound = json.getInt("currentRound");
