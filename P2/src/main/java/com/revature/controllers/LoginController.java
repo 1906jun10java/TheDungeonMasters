@@ -45,6 +45,7 @@ public class LoginController{
 		ResponseEntity<Boolean> response = null;
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
+		jsonReader.close();
 		String email = json.getString("email");
 		String password = json.getString("password");
 		boolean test = false;
