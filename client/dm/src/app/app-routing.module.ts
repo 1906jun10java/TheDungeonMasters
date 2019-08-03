@@ -3,10 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { EncounterComponent } from './components/encounter/encounter.component';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> startNewencounter
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'encounter', component: EncounterComponent }
+<<<<<<< HEAD
+=======
+
+>>>>>>> startNewencounter
 ];
 
 @NgModule({

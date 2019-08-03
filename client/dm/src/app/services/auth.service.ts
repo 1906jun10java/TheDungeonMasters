@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
+=======
+import {Injectable} from '@angular/core';
+>>>>>>> startNewencounter
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DungeonMaster} from '../models/DungeonMaster';
 import {HttpClient} from '@angular/common/http';
@@ -30,6 +34,7 @@ export class AuthService {
     return this.http.post<DungeonMaster>(
       apiUrl + '/login', {data}
     ).pipe(map(dm => {
+<<<<<<< HEAD
       if (dm) {
         sessionStorage.setItem('currentDungeonMaster', JSON.stringify(dm));
         this.currentDungeonMasterSubject.next(dm);
@@ -37,6 +42,11 @@ export class AuthService {
       } else {
         console.log('Login Error');
       }
+=======
+      sessionStorage.setItem('currentDungeonMaster', JSON.stringify(dm));
+      this.currentDungeonMasterSubject.next(dm);
+      return dm;
+>>>>>>> startNewencounter
     }));
   }
 }
