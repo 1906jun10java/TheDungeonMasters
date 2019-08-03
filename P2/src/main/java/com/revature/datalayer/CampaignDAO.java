@@ -70,4 +70,8 @@ public class CampaignDAO {
 		sf.getCurrentSession().persist(c);
 	}
 	
+	public void updateCampaign(Campaign c) {
+		sf.getCurrentSession().saveOrUpdate(c);
+	}
+	
 }

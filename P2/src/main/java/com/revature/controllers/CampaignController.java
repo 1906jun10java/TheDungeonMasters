@@ -13,11 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.revature.beans.Campaign;
+import com.revature.beans.User;
 import com.revature.services.CampaignService;
 
 @Controller
@@ -46,8 +49,11 @@ public class CampaignController {
 		return new ResponseEntity<>(cs.getCampaignsByUserId(id), HttpStatus.OK);
 	}
 	
-	@PostMapping
-	public void addCampaign(@RequestBody String rawJson) {
+	//Uses sessionData to get User, campaings can only be added while logged in
+	//@SessionAttribute("user") User user,
+	@PostMapping(value="/add")
+	public ResponseEntity<String> addCampaign(@RequestBody String rawJson) {
+		ResponseEntity<String> resp = null;
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
@@ -56,9 +62,31 @@ public class CampaignController {
 		String cName = json.getString("campaignName");
 		int cRound = json.getInt("currentRound");
 		int cTurn = json.getInt("currentTurn");
-		
-		//cs.addCampaign(u, cName, cRound, cTurn);
-		
+		try {
+			cs.addCampaign(cName, cRound, cTurn);
+			resp = new ResponseEntity<String>("Added Campaign: "+cName, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp = new ResponseEntity<String>("Adding campaign failed.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return resp;
+	}
+	
+	@PutMapping(value="/update")
+	public ResponseEntity<String> updateCampaign(@RequestBody Campaign c) {
+		ResponseEntity<String> resp = null;
+		//Might need to call AE service to add all Entities
+		try {
+			if(c.getUser() == null) {
+				throw new Exception();
+			}
+			cs.updateCampaign(c);
+			resp = new ResponseEntity<String>("Updated Campaign: "+c.getCampaignName(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp = new ResponseEntity<String>("Failed to update.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return resp;
 	}
 	
 }

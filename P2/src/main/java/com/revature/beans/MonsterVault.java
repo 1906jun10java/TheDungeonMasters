@@ -41,10 +41,6 @@ public class MonsterVault {
 		this.hp = hp;
 		this.armorClass = armorClass;
 		this.initiativeMod = initiativeMod;
-		//These are used for ActiveEntities
-		this.currentHp = 0;
-		this.initiativeTotal = 0;
-		this.type = "monster";
 	}
 
 	public int getId() {
