@@ -6,17 +6,24 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EncounterComponent } from './components/encounter/encounter.component';
+import { FormsModule } from '@angular/forms';
+import { ActiveEntityComponent } from './components/active-entity/active-entity.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    EncounterComponent,
+    ActiveEntityComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
