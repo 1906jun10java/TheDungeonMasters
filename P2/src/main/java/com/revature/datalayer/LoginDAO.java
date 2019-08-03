@@ -39,6 +39,7 @@ public class LoginDAO {
 		return sf.getCurrentSession().get(Credentials.class, id);
 	}
 	
+	//This DAO also takes in a password, which will be put in the credentials table
 	public void createUser(User u, String password) {
 		Credentials temp = new Credentials(password);
 		Session s = sf.getCurrentSession();
