@@ -39,6 +39,9 @@ public class ActiveEntity {
 	@Column(name = "ACT_TYPE") // will be either player or monster
 	private String type;
 
+	public ActiveEntity() {
+		super();
+	}
 	public ActiveEntity(Campaign containingCampaign, String name, int hp, int currentHp, int armorClass,
 			int initiativeMod, int initiativeTotal, String type) {
 		super();

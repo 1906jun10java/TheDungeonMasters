@@ -47,5 +47,10 @@ public class LoginDAO {
 		s.persist(u);
 		s.persist(temp);
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Credentials> getAllCredentials() {
+		Session s = sf.getCurrentSession();
+		return s.createQuery("from Credentials").getResultList();
+	}
 }

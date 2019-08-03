@@ -13,11 +13,11 @@ import javax.persistence.Table;
 @Table(name="CREDENTIALS")
 public class Credentials implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	public Credentials() {
+		super();
+	}
 	public Credentials(String password) {
 		super();
 		this.password = password;

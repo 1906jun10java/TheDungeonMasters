@@ -16,6 +16,9 @@ import javax.persistence.Table;
 @Table(name = "CAMPAIGN")
 public class Campaign {
 
+	public Campaign() {
+		super();
+	}
 	public Campaign(String campaignName, int currentTurn, int currentRound) {
 		super();
 		this.campaignName = campaignName;
