@@ -49,7 +49,7 @@ public class Campaign {
 	@JoinColumn(name="USER_ID")
 	private User user;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES",
 	          joinColumns = {@JoinColumn(name = "CAMPAIGN_FK")},
 	          inverseJoinColumns = {@JoinColumn(name = "ACTIVE_ENTITY_FK")})
