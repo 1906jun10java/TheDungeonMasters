@@ -26,6 +26,7 @@ public class OrmConfiguration {
 	@Bean
 	public DataSource getDataSource() {
 		DriverManagerDataSource dsrc = new DriverManagerDataSource();
+		dsrc.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		dsrc.setUrl(System.getenv("REV_DB_URL"));
 		dsrc.setUsername(System.getenv("REV_DB_USERNAME"));
 		dsrc.setPassword(System.getenv("REV_DB_PASSWORD"));
@@ -33,10 +34,9 @@ public class OrmConfiguration {
 	}
 	
 	@Bean
-	private final Properties getHibernateProps() {
+	public Properties getHibernateProps() {
 		Properties props = new Properties();
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
-		props.setProperty("hibernate.connection.driver.class", "oracle.jdbc.driver.OracleDriver");
 		props.setProperty("hibernate.show_sql", "true");
 		return props;
 	}

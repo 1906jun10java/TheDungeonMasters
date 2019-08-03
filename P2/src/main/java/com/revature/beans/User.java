@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 @Table(name="USER_TABLE")
 public class User {
@@ -28,6 +30,7 @@ public class User {
 	private String FirstName;
 	@Column(name="USER_LAST_NAME")
 	private String LastName;
+	@NaturalId
 	@Column(name="USER_EMAIL")
 	private String Email;
 	

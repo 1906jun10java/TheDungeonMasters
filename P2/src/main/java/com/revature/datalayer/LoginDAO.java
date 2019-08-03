@@ -1,13 +1,11 @@
 package com.revature.datalayer;
 
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.revature.beans.Credentials;
 import com.revature.beans.User;
 
@@ -30,6 +28,11 @@ public class LoginDAO {
 	
 	public User getUser(int id) {
 		return sf.getCurrentSession().get(User.class, id);
+	}
+	
+	//email is annotated as a natural id
+	public User getUserByEmail(String email) {
+		return sf.getCurrentSession().byNaturalId(User.class).using("email", email).load();
 	}
 	
 	public Credentials getCredentials(int id) {
