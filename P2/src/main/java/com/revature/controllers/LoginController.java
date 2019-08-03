@@ -50,6 +50,7 @@ public class LoginController{
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
+		System.out.println(json);
 		String email = json.getString("email");
 		String password = json.getString("password");
 		User u  = null;
