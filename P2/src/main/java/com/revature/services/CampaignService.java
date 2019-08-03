@@ -20,8 +20,20 @@ public class CampaignService {
 		this.cDAO = cDAO;
 	}
 	
+	public Campaign getCampaignById(int id) {
+		return cDAO.getCampaignById(id);
+	}
+	
+	public List<Campaign> getAllCampaigns(){
+		return cDAO.getAllCampaigns();
+	}
+	
 	public List<Campaign> getCampaignsByUser(User u){
 		return cDAO.getCampaignsByUser(u);
+	}
+	
+	public List<Campaign> getCampaignsByUserId(int id){
+		return cDAO.getCampaignsByUserId(id);
 	}
 	
 	//Pass in a User's List of campaign ids to get those respective campaigns
@@ -37,6 +49,7 @@ public class CampaignService {
 		return cDAO.getCampaignIdsByUser(u);
 	}
 	
+	//Can also set UserId instead of type: User
 	public void addCampaign(User u, String cName, int round, int turn) {
 		Campaign cToAdd = new Campaign(cName, round, turn);
 		cToAdd.setUser(u);

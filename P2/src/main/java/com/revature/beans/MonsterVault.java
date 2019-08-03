@@ -22,10 +22,16 @@ public class MonsterVault {
 	private String name;
 	@Column(name="HIT_POINTS")
 	private int hp;
+	@Column(name="CURRENT_HP")
+	private int currentHp;
 	@Column(name="ARMOR_CLASS")
 	private int armorClass;
 	@Column(name="INITIATIVE_MOD")
 	private int initiativeMod;
+	@Column(name = "INITIATIVE_TOTAL")
+	private int initiativeTotal;
+	@Column(name = "TYPE")
+	private String type;
 	
 	public MonsterVault() {}
 	
@@ -35,6 +41,10 @@ public class MonsterVault {
 		this.hp = hp;
 		this.armorClass = armorClass;
 		this.initiativeMod = initiativeMod;
+		//These are used for ActiveEntities
+		this.currentHp = 0;
+		this.initiativeTotal = 0;
+		this.type = "monster";
 	}
 
 	public int getId() {
