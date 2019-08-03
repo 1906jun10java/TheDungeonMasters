@@ -22,10 +22,9 @@ public class MonsterVaultController {
 	
 	@RequestMapping("/returnAll")
 	public ResponseEntity<List<MonsterVault>> returnAllMonsters(){
-		return new ResponseEntity<>(mvs.returnAllMonster(),HttpStatus.OK);
+		return new ResponseEntity<>(mvs.getAllMonsters(),HttpStatus.OK);
 	}
-	
-	
+
 	
 
 }
