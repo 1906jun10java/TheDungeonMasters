@@ -38,6 +38,12 @@ public class Credentials implements Serializable {
 		this.password = password;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	@Override
 	public String toString() {
 		return "Credentials [user= " + user + " password=" + password + "]";
