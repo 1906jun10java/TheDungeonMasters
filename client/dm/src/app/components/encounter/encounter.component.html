@@ -1,5 +1,23 @@
-
-
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
     
     <div class="container-fluid">
         <div class="row">
@@ -12,30 +30,25 @@
                     </a>
                 </h6>
               <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">New</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Resume</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Remove</a>
-                </li>
+                <li *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" data-toggle="modal" data-target="#entityModal">
+                  <button type="button" data-toggle="modal" data-target="#entityModal">
+                    <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} AC = {{entity.armorClass}}
+                  </button>
               </ul>
              
             </div>
           </nav>
           <main role="main">
-            <div class="text-center mb-4">
+              <div class="text-center mb-4">
                 <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
-            </div>
-            <app-active-entity></app-active-entity>
-            <form>
+              </div>
+              <app-active-entity></app-active-entity>
+              <form>
                 <input type="number" class="form-control" width="75%" placeholder="0000">
                 <button (click)="checkTarget()">Hit/Heal</button>   
                 <button (click)="addEffect()">Add Effect</button>
                 <button (click)="removeEffect()">Remove Effect</button>
-            </form>
-        </main>
+              </form>
+          </main>
         </div>
     </div>

@@ -1,4 +1,4 @@
-  /*
+ /*
  * Sidebar
  */
 
@@ -6,7 +6,7 @@
   position: right;
   top: 0;
   bottom: 0;
-  right: 10px;
+  right: 0px;
   z-index: 100; /* Behind the navbar */
   padding: 64px 0 0; /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
@@ -58,4 +58,5 @@
 
 [role="main"] {
   padding-top: 72px; /* Space for fixed navbar */
+  padding-left: 15px;
 }
