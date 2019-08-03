@@ -1,38 +1,45 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {DungeonMaster} from '../models/DungeonMaster';
-import {HttpClient} from '@angular/common/http';
+import {User} from '../models/User';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 // Base API URL
-const apiUrl = '';
+const apiUrl = 'http://localhost:8080/P2';
+
+// Headers
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentDungeonMasterSubject: BehaviorSubject<DungeonMaster>;
-  public currentDungeonMaster: Observable<DungeonMaster>;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
+  isLoggedIn = false;
 
   constructor(private http: HttpClient) {
-    this.currentDungeonMasterSubject = new BehaviorSubject<DungeonMaster>(
-      JSON.parse(sessionStorage.getItem('currentDungeonMaster'))
+    this.currentUserSubject = new BehaviorSubject<User>(
+      JSON.parse(sessionStorage.getItem('currentUser'))
     );
-    this.currentDungeonMaster = this.currentDungeonMasterSubject.asObservable();
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public getCurrentDungeonMasterValue(): DungeonMaster {
-    return this.currentDungeonMasterSubject.value;
+  public getCurrentDungeonMasterValue(): User {
+    return this.currentUserSubject.value;
   }
 
   // Login method
   login(data) {
-    return this.http.post<DungeonMaster>(
-      apiUrl + '/login', {data}
-    ).pipe(map(dm => {
-      sessionStorage.setItem('currentDungeonMaster', JSON.stringify(dm));
-      this.currentDungeonMasterSubject.next(dm);
-      return dm;
+    return this.http.post<User>(
+      apiUrl + '/login', data, httpOptions
+    ).pipe(map(user => {
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+      this.isLoggedIn = true;
+      return user;
     }));
   }
 }
