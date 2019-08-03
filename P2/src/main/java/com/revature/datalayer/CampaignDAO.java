@@ -1,5 +1,6 @@
 package com.revature.datalayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -27,7 +28,7 @@ public class CampaignDAO {
 		this.sf = sf;
 	}
 	
-	public Campaign getCampaignsById(int id) {
+	public Campaign getCampaignById(int id) {
 		return sf.getCurrentSession().get(Campaign.class, id);
 	}
 
@@ -39,6 +40,16 @@ public class CampaignDAO {
 		cq.select(root).where(cb.equal(root.get("user"), u));
 		Query<Campaign> q = s.createQuery(cq);
 		return q.getResultList();
+	}
+	
+	//Change to get ids only, time permitting
+	public List<Integer> getCampaignIdsByUser(User u){
+		List<Campaign> temp = getCampaignsByUser(u);
+		List<Integer> campIds = new ArrayList<>();
+		for(Campaign c: temp) {
+			campIds.add(c.getCampaignId());
+		}
+		return campIds;
 	}
 	
 	//This, and the Active Entities DAO, will assume that the respective 

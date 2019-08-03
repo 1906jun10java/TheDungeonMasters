@@ -3,7 +3,10 @@ package com.revature.controllers;
 import java.io.StringReader;
 import java.util.List;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +19,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.Credentials;
 import com.revature.beans.User;
+import com.revature.services.CampaignService;
 import com.revature.services.LoginService;
 
 @Controller
 @RequestMapping(value="/login")
 public class LoginController{
 	private LoginService ls;
+	private CampaignService cs;
 	ObjectMapper mapper = new ObjectMapper();
 	
 	@Autowired
-	public LoginController(LoginService ls) {
-		this.ls =ls;
+	public LoginController(LoginService ls, CampaignService cs) {
+		this.ls = ls;
+		this.cs = cs;
 	}
 	
 	
@@ -51,6 +57,9 @@ public class LoginController{
 		User u  = null;
 		try {
 			u = ls.loginTest(email, password);
+			if(u != null) {
+				u.setCampaignIds(cs.getCampaignIdsByUser(u)); //Sets a list of campaign ids belonging to the user
+			}
 			response = new ResponseEntity<>(u ,HttpStatus.OK);
 		}catch(Exception e) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

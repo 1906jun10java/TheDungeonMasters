@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -44,6 +45,7 @@ public class User implements Serializable {
 	private String Email;
 	
 	//List of my column IDs will be passed along with user
+	@Transient
 	private List<Integer> campaignIds;
 
 	public int getUserId() {
