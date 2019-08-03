@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +32,9 @@ public class ActiveEntity {
 	@Column(name = "ACT_INITIATIVE_TOTAL")
 	private int initiativeTotal;
 	@Column(name = "ACT_TYPE") // will be either player or monster
-	private String type;
+	private String entityTypetype;
+	@Column(name="ACT_CONDITIONS")
+	private ArrayList<Conditions> conditions;
 
 	public ActiveEntity() {
 		super();
@@ -44,7 +48,7 @@ public class ActiveEntity {
 		this.armorClass = armorClass;
 		this.initiativeMod = initiativeMod;
 		this.initiativeTotal = initiativeTotal;
-		this.type = type;
+		this.entityTypetype = type;
 	}
 
 	public int getId() {
@@ -102,13 +106,18 @@ public class ActiveEntity {
 	public void setInitiativeTotal(int initiativeTotal) {
 		this.initiativeTotal = initiativeTotal;
 	}
-
-	public String getType() {
-		return type;
+	
+	public String getEntityTypetype() {
+		return entityTypetype;
 	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setEntityTypetype(String entityTypetype) {
+		this.entityTypetype = entityTypetype;
+	}
+	public ArrayList<Conditions> getConditions() {
+		return conditions;
+	}
+	public void setConditions(ArrayList<Conditions> conditions) {
+		this.conditions = conditions;
 	}
 
 }
