@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {first} from 'rxjs/operators';
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { first } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-login',
@@ -37,6 +40,7 @@ export class LoginComponent implements OnInit {
     }
 
     const formData = this.loginForm.getRawValue();
+
 
     this.authService.login(JSON.stringify(formData)).pipe(first()
     ).subscribe(
