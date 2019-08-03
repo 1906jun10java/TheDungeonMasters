@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,10 +24,18 @@ public class MonsterVault {
 	private String name;
 	@Column(name="HIT_POINTS")
 	private int hp;
+	@Column(name="CURRENT_HP")
+	private int currentHp;
 	@Column(name="ARMOR_CLASS")
 	private int armorClass;
 	@Column(name="INITIATIVE_MOD")
 	private int initiativeMod;
+	@Column(name = "INITIATIVE_TOTAL")
+	private int initiativeTotal;
+	@Column(name = "TYPE")
+	private String entityType;
+	@Column(name="CONDITIONS")
+	private ArrayList<Conditions> conditions;
 	
 	public MonsterVault() {}
 	
@@ -75,6 +85,22 @@ public class MonsterVault {
 
 	public void setInitiativeMod(int initiativeMod) {
 		this.initiativeMod = initiativeMod;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
+	}
+
+	public ArrayList<Conditions> getConditions() {
+		return conditions;
+	}
+
+	public void setConditions(ArrayList<Conditions> conditions) {
+		this.conditions = conditions;
 	}
 	
 }

@@ -41,6 +41,26 @@ public class ActiveEntityDAO {
 		return q.getResultList();
 	}
 	
+	public void deleteEntity(ActiveEntity ae) {
+		sf.getCurrentSession().delete(ae);
+	}
+	
+	public void deleteEntity(List<ActiveEntity> aeList) {
+		Session s = sf.getCurrentSession();
+		for(ActiveEntity ae : aeList) {
+			s.delete(ae);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void deleteEntityByCampaign(Campaign c) {
+		String hql = "delete from ActiveEntity where CAMPAIGN_ID := cid";
+		Session s = sf.getCurrentSession();
+		Query<ActiveEntity> q = s.createQuery(hql);
+		q.setParameter("cid", c.getCampaignId());
+		q.executeUpdate();
+	}
+	
 	public void createActiveEntity(ActiveEntity ae) {
 		sf.getCurrentSession().persist(ae);
 	}

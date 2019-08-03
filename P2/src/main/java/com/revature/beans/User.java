@@ -1,5 +1,8 @@
 package com.revature.beans;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,12 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "USER_TABLE")
-public class User {
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
 	public User() {
 		super();
 	}
@@ -36,6 +43,10 @@ public class User {
 	@NaturalId
 	@Column(name = "USER_EMAIL")
 	private String Email;
+	
+	//List of my column IDs will be passed along with user
+	@Transient
+	private List<Integer> campaignIds;
 
 	public int getUserId() {
 		return userId;
@@ -67,6 +78,14 @@ public class User {
 
 	public void setEmail(String email) {
 		Email = email;
+	}
+
+	public List<Integer> getCampaignIds() {
+		return campaignIds;
+	}
+
+	public void setCampaignIds(List<Integer> campaignIds) {
+		this.campaignIds = campaignIds;
 	}
 
 	@Override

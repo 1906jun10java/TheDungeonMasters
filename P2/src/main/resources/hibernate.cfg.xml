@@ -21,6 +21,7 @@
 		<!-- where are our mapped beans? -->
 		<mapping class="com.revature.beans.ActiveEntity"></mapping>
 		<mapping class="com.revature.beans.Campaign"></mapping>
+		<mapping class="com.revature.beans.Conditions"></mapping>
 		<mapping class="com.revature.beans.Credentials"></mapping>
 		<mapping class="com.revature.beans.MonsterVault"></mapping>
 		<mapping class="com.revature.beans.User"></mapping>

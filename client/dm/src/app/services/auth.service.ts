@@ -1,36 +1,47 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 =======
 import {Injectable} from '@angular/core';
 >>>>>>> startNewencounter
+=======
+import {Injectable} from '@angular/core';
+>>>>>>> d349b4fb6aec940640c58c0bee9502aa98fd5350
 import {BehaviorSubject, Observable} from 'rxjs';
-import {DungeonMaster} from '../models/DungeonMaster';
-import {HttpClient} from '@angular/common/http';
+import {User} from '../models/User';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 // Base API URL
-const apiUrl = '';
+const apiUrl = 'http://localhost:8080/P2';
+
+// Headers
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentDungeonMasterSubject: BehaviorSubject<DungeonMaster>;
-  public currentDungeonMaster: Observable<DungeonMaster>;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
+  isLoggedIn = false;
 
   constructor(private http: HttpClient) {
-    this.currentDungeonMasterSubject = new BehaviorSubject<DungeonMaster>(
-      JSON.parse(sessionStorage.getItem('currentDungeonMaster'))
+    this.currentUserSubject = new BehaviorSubject<User>(
+      JSON.parse(sessionStorage.getItem('currentUser'))
     );
-    this.currentDungeonMaster = this.currentDungeonMasterSubject.asObservable();
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public getCurrentDungeonMasterValue(): DungeonMaster {
-    return this.currentDungeonMasterSubject.value;
+  public getCurrentDungeonMasterValue(): User {
+    return this.currentUserSubject.value;
   }
 
   // Login method
   login(data) {
+<<<<<<< HEAD
     return this.http.post<DungeonMaster>(
       apiUrl + '/login', {data}
     ).pipe(map(dm => {
@@ -47,6 +58,15 @@ export class AuthService {
       this.currentDungeonMasterSubject.next(dm);
       return dm;
 >>>>>>> startNewencounter
+=======
+    return this.http.post<User>(
+      apiUrl + '/login', data, httpOptions
+    ).pipe(map(user => {
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+      this.currentUserSubject.next(user);
+      this.isLoggedIn = true;
+      return user;
+>>>>>>> d349b4fb6aec940640c58c0bee9502aa98fd5350
     }));
   }
 }

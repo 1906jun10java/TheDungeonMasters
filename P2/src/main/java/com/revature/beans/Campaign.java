@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -44,6 +48,12 @@ public class Campaign {
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID")
 	private User user;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES",
+	          joinColumns = {@JoinColumn(name = "CAMPAIGN_FK")},
+	          inverseJoinColumns = {@JoinColumn(name = "ACTIVE_ENTITY_FK")})
+	List<ActiveEntity> activeEntities;
 
 	public int getCampaignId() {
 		return campaignId;
@@ -85,6 +95,12 @@ public class Campaign {
 		this.user = user;
 	}
 
+	public List<ActiveEntity> getActiveEntities() {
+		return activeEntities;
+	}
+	public void setActiveEntities(List<ActiveEntity> activeEntities) {
+		this.activeEntities = activeEntities;
+	}
 	@Override
 	public String toString() {
 		return "Campaign [ campaignId=" + campaignId + ", campaignName=" + campaignName

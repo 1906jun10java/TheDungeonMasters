@@ -47,8 +47,8 @@ public class MonsterDAO {
 		return q.getResultList();
 	}
 	
-	public void createMonster(MonsterVault m) {
-		sf.getCurrentSession().persist(m);
+	public void addMonster(MonsterVault m) {
+		sf.getCurrentSession().merge(m);
 	}
 
 }

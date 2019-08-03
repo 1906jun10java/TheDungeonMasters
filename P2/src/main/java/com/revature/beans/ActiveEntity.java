@@ -1,12 +1,12 @@
 package com.revature.beans;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,11 +19,6 @@ public class ActiveEntity {
 	@SequenceGenerator(allocationSize = 1, name = "activeEntitySequence", sequenceName = "SQ_ACTIVE_ENTITY_PK")
 	@Column(name = "ACT_ENTITY_ID")
 	private int id;
-
-	@ManyToOne
-	@JoinColumn(name = "CAMPAIGN_ID")
-	private Campaign containingCampaign;
-
 	@Column(name = "ACT_ENTITY_NAME")
 	private String name;
 	@Column(name = "ACT_HIT_POINTS")
@@ -37,7 +32,9 @@ public class ActiveEntity {
 	@Column(name = "ACT_INITIATIVE_TOTAL")
 	private int initiativeTotal;
 	@Column(name = "ACT_TYPE") // will be either player or monster
-	private String type;
+	private String entityTypetype;
+	@Column(name="ACT_CONDITIONS")
+	private ArrayList<Conditions> conditions;
 
 	public ActiveEntity() {
 		super();
@@ -45,14 +42,13 @@ public class ActiveEntity {
 	public ActiveEntity(Campaign containingCampaign, String name, int hp, int currentHp, int armorClass,
 			int initiativeMod, int initiativeTotal, String type) {
 		super();
-		this.containingCampaign = containingCampaign;
 		this.name = name;
 		this.hp = hp;
 		this.currentHp = currentHp;
 		this.armorClass = armorClass;
 		this.initiativeMod = initiativeMod;
 		this.initiativeTotal = initiativeTotal;
-		this.type = type;
+		this.entityTypetype = type;
 	}
 
 	public int getId() {
@@ -61,14 +57,6 @@ public class ActiveEntity {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Campaign getContainingCampaign() {
-		return containingCampaign;
-	}
-
-	public void setContainingCampaign(Campaign containingCampaign) {
-		this.containingCampaign = containingCampaign;
 	}
 
 	public String getName() {
@@ -118,13 +106,18 @@ public class ActiveEntity {
 	public void setInitiativeTotal(int initiativeTotal) {
 		this.initiativeTotal = initiativeTotal;
 	}
-
-	public String getType() {
-		return type;
+	
+	public String getEntityTypetype() {
+		return entityTypetype;
 	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setEntityTypetype(String entityTypetype) {
+		this.entityTypetype = entityTypetype;
+	}
+	public ArrayList<Conditions> getConditions() {
+		return conditions;
+	}
+	public void setConditions(ArrayList<Conditions> conditions) {
+		this.conditions = conditions;
 	}
 
 }
