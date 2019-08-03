@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class MonsterVaultService {
 	private MonsterDAO monsterDAO;
 	
 	@Autowired
-	public MonsterVaultService(MonsterDAO monsterDAO) {
-		this.monsterDAO = monsterDAO;
+	public MonsterVaultService(MonsterDAO md) {
+		this.md = md;
 	}
 	
 	public List<MonsterVault> returnAllMonster(){
@@ -24,4 +25,21 @@ public class MonsterVaultService {
 		monsters = monsterDAO.getAllMonsters();
 		return monsters;
 	}
+	
+	private MonsterDAO md;
+	
+	public List<MonsterVault> getAllMonsters(){
+		return md.getAllMonsters();
+	}
+	
+	public List<MonsterVault> getAllMonstersByName(String name){
+		return md.getMonstersByName(name);
+	}
+	
+	//TODO make it so
+	public void addMonster(String name, int hp, int ac, int initMod) {
+		MonsterVault mv = new MonsterVault(name, hp, ac, initMod);
+		md.addMonster(mv);
+	}
+
 }
