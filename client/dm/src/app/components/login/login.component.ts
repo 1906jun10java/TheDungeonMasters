@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { first } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-login',
@@ -37,11 +40,14 @@ export class LoginComponent implements OnInit {
     }
 
     const formData = this.loginForm.getRawValue();
-    const serializedData = JSON.stringify(formData);
-    this.authService.login(serializedData).pipe(first()
+
+
+    this.authService.login(JSON.stringify(formData)).pipe(first()
     ).subscribe(
       data => {
-        console.log(data);
+        if (this.authService.isLoggedIn) {
+          window.location.replace('/campaign');
+        }
       },
       error => {
         console.log(error);
