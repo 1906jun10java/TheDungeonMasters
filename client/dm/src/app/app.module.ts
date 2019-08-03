@@ -12,7 +12,6 @@ import { ActiveEntityComponent } from './components/active-entity/active-entity.
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
