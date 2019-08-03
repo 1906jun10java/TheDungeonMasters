@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.revature.beans.MonsterVault;
@@ -23,6 +24,20 @@ public class MonsterVaultController {
 	@RequestMapping("/returnAll")
 	public ResponseEntity<List<MonsterVault>> returnAllMonsters(){
 		return new ResponseEntity<>(mvs.getAllMonsters(),HttpStatus.OK);
+	}
+	
+	@RequestMapping("/addMonster")
+	public ResponseEntity<String> addMonster(@RequestBody MonsterVault monsterVault){
+		ResponseEntity<String> response = null;
+		try {
+			mvs.addMonster(monsterVault);
+			response = new ResponseEntity<>("Successfully added monster", HttpStatus.OK);
+		}catch(Exception e){
+			response = new ResponseEntity<>("Failed to create monster", HttpStatus.BAD_REQUEST);
+		}
+		return response;
+		
+		
 	}
 
 	

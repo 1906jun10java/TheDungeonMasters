@@ -22,9 +22,8 @@ public class MonsterVaultService {
 		return md.getAllMonsters();
 	}
 	
-	public void addMonster(String name, int hp, int ac, int initMod) {
-		MonsterVault mv = new MonsterVault(name, hp, ac, initMod);
-		md.addMonster(mv);
+	public void addMonster(MonsterVault monsterVault) {
+		md.addMonster(monsterVault);
 	}
 
 }
