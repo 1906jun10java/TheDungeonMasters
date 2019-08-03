@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.revature.beans.Campaign;
-import com.revature.beans.User;
 import com.revature.services.CampaignService;
 
 @Controller
