@@ -37,7 +37,7 @@ public class OrmConfiguration {
 	public Properties getHibernateProps() {
 		Properties props = new Properties();
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
-		props.setProperty("hibernate.show_sql", "true");
+		props.setProperty("hibernate.show_sql", "false");
 		return props;
 	}
 	

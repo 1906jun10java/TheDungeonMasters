@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ActiveEntityComponent } from './components/active-entity/active-entity.component';
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
+import { MonsterVaultComponent } from './components/monster-vault/monster-vault.component';
 
 
 
@@ -22,7 +23,8 @@ import {NavComponent} from './components/nav/nav.component';
     EncounterComponent,
     ActiveEntityComponent,
     CampaignViewComponent,
-    NavComponent
+    NavComponent,
+    MonsterVaultComponent
   ],
   imports: [
     BrowserModule,
