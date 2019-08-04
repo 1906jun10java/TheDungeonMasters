@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class ModalService {
 
-  monsterModalEmitter = new EventEmitter();
+  monsterModalEmitter = new EventEmitter(); //Custom event for monsterModal
   subscription: Subscription;
 
   constructor() { }

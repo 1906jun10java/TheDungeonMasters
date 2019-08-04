@@ -15,8 +15,6 @@ const httpHeaders = {
 })
 export class MonsterService {
 
-  private monsters: Observable<Entity>;
-
   constructor(private http: HttpClient) { }
 
   getAllMonsters(){

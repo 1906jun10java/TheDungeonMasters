@@ -4,7 +4,7 @@ import { MonsterService } from '../../services/monster.service';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
-  selector: 'app-monster-vault',
+  selector: 'monster-vault',
   templateUrl: './monster-vault.component.html',
   styleUrls: ['./monster-vault.component.css']
 })
@@ -14,17 +14,20 @@ export class MonsterVaultComponent implements OnInit {
   private modalElementId = 'modal-container';
   private overlayElementId = 'monster-modal-overlay';
 
-  constructor(private monsterService: MonsterService,
+  //Modal service is a custom event emitter which navbutton calls and to which
+  //this subscribed.
+  constructor(
+    private monsterService: MonsterService,
     private modalService: ModalService
     ) { }
 
   ngOnInit() {
     if(this.modalService.subscription == undefined){
       this.modalService.subscription = 
-      this.modalService.toggleMonsterModal.subscribe(() =>{
+      this.modalService.monsterModalEmitter.subscribe(() =>{
         this.toggle();
       });
-    })
+    }
     this.monsterService.getAllMonsters().subscribe(monsters =>{
       if(monsters){
         this.monsters = monsters;
@@ -33,7 +36,13 @@ export class MonsterVaultComponent implements OnInit {
   }
 
   toggle(){
-    this.modalService
+    if(!this.isShown){
+      this.show();
+      this.isShown = true;
+    } else{
+      this.hide();
+      this.isShown = false;
+    }
   }
 
   show() {

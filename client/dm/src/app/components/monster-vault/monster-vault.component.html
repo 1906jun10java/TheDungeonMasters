@@ -1,7 +1,7 @@
-<div id="monster-modal-overlay" (click)="close()" class="hidden">
+<div id="monster-modal-overlay" (click)="hide()" class="hidden">
     <div id="modal-container">
         <ul id="monster-list" class="flex-column">
-            <li *ngfor="let monster of monsters">{{monster}}</li>
+            <li *ngFor="let monster of monsters">{{monster['name']}}</li>
         </ul>
     </div>
 </div>
