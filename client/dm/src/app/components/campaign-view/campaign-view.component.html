@@ -25,6 +25,7 @@
             <li *ngFor="let campaign of campaigns">
               <a class="nav-link" (click)="setCurrentCampaign(campaign['campaignId'])" [routerLink]="">{{ campaign['campaignName'] }}</a>
             </li>
+            <app-log></app-log>
           </ul>
         </div>
       </nav>

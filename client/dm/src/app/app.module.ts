@@ -10,7 +10,8 @@ import {ActiveEntityComponent} from './components/active-entity/active-entity.co
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
-
+import { LogComponent } from './components/log/log.component';
+import { LogService } from './services/log.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import {EntityCardComponent} from './components/entity-card/entity-card.componen
     ActiveEntityComponent,
     CampaignViewComponent,
     NavComponent,
-    EntityCardComponent
+    EntityCardComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import {EntityCardComponent} from './components/entity-card/entity-card.componen
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
