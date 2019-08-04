@@ -32,7 +32,7 @@ public class ActiveEntity {
 	@Column(name = "ACT_INITIATIVE_TOTAL")
 	private int initiativeTotal;
 	@Column(name = "ACT_TYPE") // will be either player or monster
-	private String entityTypetype;
+	private String entityType;
 	@Column(name="ACT_CONDITIONS")
 	private ArrayList<Conditions> conditions;
 
@@ -48,7 +48,7 @@ public class ActiveEntity {
 		this.armorClass = armorClass;
 		this.initiativeMod = initiativeMod;
 		this.initiativeTotal = initiativeTotal;
-		this.entityTypetype = type;
+		this.entityType = type;
 	}
 
 	public int getId() {
@@ -108,10 +108,10 @@ public class ActiveEntity {
 	}
 	
 	public String getEntityTypetype() {
-		return entityTypetype;
+		return entityType;
 	}
 	public void setEntityTypetype(String entityTypetype) {
-		this.entityTypetype = entityTypetype;
+		this.entityType = entityTypetype;
 	}
 	public ArrayList<Conditions> getConditions() {
 		return conditions;
