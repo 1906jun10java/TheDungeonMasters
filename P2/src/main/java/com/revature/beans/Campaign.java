@@ -10,11 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "CAMPAIGN")
@@ -49,10 +48,8 @@ public class Campaign {
 	@JoinColumn(name="USER_ID")
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES",
-	          joinColumns = {@JoinColumn(name = "CAMPAIGN_FK")},
-	          inverseJoinColumns = {@JoinColumn(name = "ACTIVE_ENTITY_FK")})
+	//We will have to set this up manually with the Campaign Controller
+	@Transient
 	List<ActiveEntity> activeEntities;
 
 	public int getCampaignId() {

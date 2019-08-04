@@ -1,6 +1,28 @@
-<div id="monster-modal-overlay" (click)="hide()" class="hidden">
-    <div id="modal-container" class="d-flex">
-        <div id="monster-table" class="card-columns" >
+<div id="monster-modal-overlay" ng-click="toggle()" class="hidden">
+    <div id="modal-container" class="d-flex" ng-click="$event.stopPropagation()">
+        
+        <div class="row justify-content-center">
+            <form [formGroup]="newMonsterForm" class="form" autocomplete="off">
+                <div class="text-center mb-4">
+                    <h4>Create a New Monster</h4>
+                </div>
+                <div class="form-label-group">
+                    <input type="text" class="form-control" formControlName="name" placeholder="Monster Name" required autofocus>
+                </div>
+                <div class="form-label-group">
+                    <input type="number" class="form-control" formControlName="hp" placeholder="0" required>
+                </div>
+                <div class="form-label-group">
+                    <input type="number" class="form-control" formControlName="armorClass" placeholder="0" required>
+                </div>
+                <div class="form-label-group">
+                    <input type="number" class="form-control" formControlName="initiativeMod" placeholder="0" required>
+                </div>
+                <button class="btn btn-md btn-primary btn-dark btn-block" (click)="createMonster()">Create</button>
+            </form>
+        </div>
+
+        <div id="monster-table" class="card-columns">
             <table class="card" *ngFor="let monster of monsters">
                 <th>{{monster['name']}}</th>
                 <tr>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.beans.Campaign;
+import com.revature.services.ActiveEntityService;
 import com.revature.services.CampaignService;
 
 @Controller
@@ -26,10 +27,12 @@ import com.revature.services.CampaignService;
 public class CampaignController {
 
 	private CampaignService cs;
+	private ActiveEntityService aes;
 	
 	@Autowired
-	public CampaignController(CampaignService cs) {
+	public CampaignController(CampaignService cs, ActiveEntityService aes) {
 		this.cs = cs;
+		this.aes = aes;
 	}
 	
 	@RequestMapping(value="/campaign/{id}")

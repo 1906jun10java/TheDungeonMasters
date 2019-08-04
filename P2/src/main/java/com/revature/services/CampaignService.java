@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.ActiveEntity;
 import com.revature.beans.Campaign;
 import com.revature.beans.User;
 import com.revature.datalayer.CampaignDAO;
@@ -56,6 +57,8 @@ public class CampaignService {
 	}
 	
 	public void updateCampaign(Campaign c) {
+		Campaign test = cDAO.getCampaignById(c.getCampaignId());
+		
 		cDAO.updateCampaign(c);
 	}
 
