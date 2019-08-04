@@ -1,7 +1,21 @@
 <div id="monster-modal-overlay" (click)="hide()" class="hidden">
-    <div id="modal-container">
-        <ul id="monster-list" class="flex-column">
-            <li *ngFor="let monster of monsters">{{monster['name']}}</li>
-        </ul>
+    <div id="modal-container" class="d-flex">
+        <div id="monster-table" class="card-columns" >
+            <table class="card" *ngFor="let monster of monsters">
+                <th>{{monster['name']}}</th>
+                <tr>
+                    <td>HitPoints</td>
+                    <td>{{monster['hp']}}</td>
+                </tr>
+                <tr>
+                    <td>ArmorClass</td>
+                    <td>{{monster['armorClass']}}</td>
+                </tr>
+                <tr>
+                    <td>Initiative Modifier</td>
+                    <td>{{monster['initiativeMod']}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
