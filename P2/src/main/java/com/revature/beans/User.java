@@ -17,7 +17,7 @@ import org.hibernate.annotations.NaturalId;
 @Entity
 @Table(name = "USER_TABLE")
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public User() {
@@ -43,8 +43,8 @@ public class User implements Serializable {
 	@NaturalId
 	@Column(name = "USER_EMAIL")
 	private String Email;
-	
-	//List of my column IDs will be passed along with user
+
+	// List of my column IDs will be passed along with user
 	@Transient
 	private List<Integer> campaignIds;
 
@@ -93,5 +93,4 @@ public class User implements Serializable {
 		return "User [userId=" + userId + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
 				+ "]";
 	}
-
 }

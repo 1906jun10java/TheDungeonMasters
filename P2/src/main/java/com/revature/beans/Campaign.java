@@ -23,6 +23,7 @@ public class Campaign {
 	public Campaign() {
 		super();
 	}
+
 	public Campaign(String campaignName, int currentTurn, int currentRound) {
 		super();
 		this.campaignName = campaignName;
@@ -44,15 +45,14 @@ public class Campaign {
 
 	@Column(name = "CURRENT_ROUND")
 	private int currentRound;
-	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="USER_ID")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER_ID")
 	private User user;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES",
-	          joinColumns = {@JoinColumn(name = "CAMPAIGN_FK")},
-	          inverseJoinColumns = {@JoinColumn(name = "ACTIVE_ENTITY_FK")})
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES", joinColumns = {
+			@JoinColumn(name = "CAMPAIGN_FK") }, inverseJoinColumns = { @JoinColumn(name = "ACTIVE_ENTITY_FK") })
 	List<ActiveEntity> activeEntities;
 
 	public int getCampaignId() {
@@ -86,7 +86,7 @@ public class Campaign {
 	public void setCurrentRound(int currentRound) {
 		this.currentRound = currentRound;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -98,14 +98,15 @@ public class Campaign {
 	public List<ActiveEntity> getActiveEntities() {
 		return activeEntities;
 	}
+
 	public void setActiveEntities(List<ActiveEntity> activeEntities) {
 		this.activeEntities = activeEntities;
 	}
+
 	@Override
 	public String toString() {
-		return "Campaign [ campaignId=" + campaignId + ", campaignName=" + campaignName
-				+ ", currentTurn=" + currentTurn + ", currentRound=" + currentRound + "]";
+		return "Campaign [ campaignId=" + campaignId + ", campaignName=" + campaignName + ", currentTurn=" + currentTurn
+				+ ", currentRound=" + currentRound + "]";
 	}
-
 
 }
