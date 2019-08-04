@@ -23,7 +23,7 @@
           </h6>
           <ul class="nav flex-column">
             <li *ngFor="let campaign of campaigns">
-              <a class="nav-link" href="#">{{ campaign['campaignName'] }}</a>
+              <a class="nav-link" (click)="setCurrentCampaign(campaign['campaignId'])" [routerLink]="">{{ campaign['campaignName'] }}</a>
             </li>
           </ul>
         </div>
@@ -31,7 +31,25 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Players:</h2>
+        <div *ngIf="currentCampaign && currentCampaign['activeEntities']">
+          <div *ngFor="let entity of currentCampaign['activeEntities']; let i = index">
+            <div class="row" *ngIf="i%5 === 0">
+              <div class="col" *ngIf="i < currentCampaign['activeEntities'].length && entity['entityTypetype'] === 'player'">
+                <app-entity-card [entity]="currentCampaign['activeEntities'][i]"></app-entity-card>
+              </div>
+            </div>
+          </div>
+        </div>
         <h2>Monsters:</h2>
+        <div *ngIf="currentCampaign && currentCampaign['activeEntities']">
+          <div *ngFor="let entity of currentCampaign['activeEntities']; let i = index">
+            <div class="row" *ngIf="i%5 === 0">
+              <div class="col" *ngIf="i < currentCampaign['activeEntities'].length && entity['entityTypetype'] === 'monster'">
+                <app-entity-card [entity]="currentCampaign['activeEntities'][i]"></app-entity-card>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </div>
