@@ -13,6 +13,7 @@ import { ActiveEntityComponent } from './components/active-entity/active-entity.
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
 import { MonsterVaultComponent } from './components/monster-vault/monster-vault.component';
+import { ModalService } from './services/modal.service';
 
 
 
@@ -33,7 +34,9 @@ import { MonsterVaultComponent } from './components/monster-vault/monster-vault.
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    ModalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChildren} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,8 @@ import {AuthService} from '../../services/auth.service';
 export class NavComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService, 
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {}
@@ -19,5 +21,9 @@ export class NavComponent implements OnInit {
     this.authService.currentUser = null;
     sessionStorage.clear();
     window.location.replace('/login');
+  }
+
+  showMonsterModal(){
+    this.modalService.toggleMonsterModal();
   }
 }

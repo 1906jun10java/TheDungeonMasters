@@ -1,5 +1,7 @@
-<div id="overlay">
+<div id="monster-modal-overlay" (click)="close()" class="hidden">
     <div id="modal-container">
-
+        <ul id="monster-list" class="flex-column">
+            <li *ngfor="let monster of monsters">{{monster}}</li>
+        </ul>
     </div>
 </div>
