@@ -45,23 +45,19 @@ export class MonsterVaultComponent implements OnInit {
   }
 
   toggle(){
-    if(!this.isShown){
-      this.show();
-      this.isShown = true;
-    } else{
-      this.hide();
-      this.isShown = false;
-    }
+    !this.isShown ? this.hide() : this.show();
   }
 
   show() {
     document.getElementById(this.modalElementId).className = 'show';
     document.getElementById(this.overlayElementId).className = 'show';
+    this.isShown = true;
   }
 
   hide() {
     document.getElementById(this.modalElementId).className = 'hidden';
     document.getElementById(this.overlayElementId).className = 'hidden';
+    this.isShown = false;
   }
 
   //TODO make monster from form
