@@ -19,6 +19,8 @@ public class ActiveEntity {
 	@SequenceGenerator(allocationSize = 1, name = "activeEntitySequence", sequenceName = "SQ_ACTIVE_ENTITY_PK")
 	@Column(name = "ACT_ENTITY_ID")
 	private int id;
+	@Column(name="CAMPAIGN_ID")
+	private int campaignId;
 	@Column(name = "ACT_ENTITY_NAME")
 	private String name;
 	@Column(name = "ACT_HIT_POINTS")
@@ -39,9 +41,10 @@ public class ActiveEntity {
 	public ActiveEntity() {
 		super();
 	}
-	public ActiveEntity(Campaign containingCampaign, String name, int hp, int currentHp, int armorClass,
+	public ActiveEntity(Campaign containingCampaign,int campaignId, String name, int hp, int currentHp, int armorClass,
 			int initiativeMod, int initiativeTotal, String type) {
 		super();
+		this.campaignId = campaignId;
 		this.name = name;
 		this.hp = hp;
 		this.currentHp = currentHp;
@@ -51,6 +54,12 @@ public class ActiveEntity {
 		this.entityType = type;
 	}
 
+	public int getCampaignId() {
+		return campaignId;
+	}
+	public void setCampaignId(int campaignId) {
+		this.campaignId = campaignId;
+	}
 	public int getId() {
 		return id;
 	}

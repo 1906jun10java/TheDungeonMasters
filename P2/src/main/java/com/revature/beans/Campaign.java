@@ -52,7 +52,7 @@ public class Campaign {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES", joinColumns = {
-			@JoinColumn(name = "CAMPAIGN_FK") }, inverseJoinColumns = { @JoinColumn(name = "ACTIVE_ENTITY_FK") })
+			@JoinColumn(name = "CAMPAIGN_FK") }, inverseJoinColumns = { @JoinColumn(name = "ACTIVE_ENTITY_CAMPAIGN_ID") })
 	List<ActiveEntity> activeEntities;
 
 	public int getCampaignId() {

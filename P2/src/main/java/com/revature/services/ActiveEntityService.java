@@ -24,9 +24,9 @@ public class ActiveEntityService {
 		return tempList;
 	}
 	
-	public void storeActiveEntities(List<ActiveEntity> activeEntityList) {
-		for(ActiveEntity ae : activeEntityList) {
+	public void storeActiveEntities(ActiveEntity ae /*activeEntityList*/) {
+		//for(ActiveEntity ae : activeEntityList) {
 			aed.createActiveEntity(ae);
-		}
+		//}
 	}
 }
