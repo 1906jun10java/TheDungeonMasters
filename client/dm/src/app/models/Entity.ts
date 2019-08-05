@@ -4,7 +4,7 @@ export class Entity {
   id: number;
   name: string;
   entityType: string;
-  hp: number;
+  maxHp: number;
   currentHp: number;
   armorClass: number;
   conditions: Condition[];
