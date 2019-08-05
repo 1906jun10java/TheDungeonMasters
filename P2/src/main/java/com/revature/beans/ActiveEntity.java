@@ -107,11 +107,19 @@ public class ActiveEntity {
 		this.initiativeTotal = initiativeTotal;
 	}
 	
+<<<<<<< HEAD
 	public String getEntityTypetype() {
 		return entityType;
 	}
 	public void setEntityTypetype(String entityTypetype) {
 		this.entityType = entityTypetype;
+=======
+	public String getEntityType() {
+		return entityType;
+	}
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
+>>>>>>> dev
 	}
 	public ArrayList<Conditions> getConditions() {
 		return conditions;
