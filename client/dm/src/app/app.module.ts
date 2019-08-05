@@ -1,18 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-<<<<<<< HEAD
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { EncounterComponent } from './components/encounter/encounter.component';
-import { FormsModule } from '@angular/forms';
-import { ActiveEntityComponent } from './components/active-entity/active-entity.component';
-import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
-import {NavComponent} from './components/nav/nav.component';
-=======
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -24,7 +11,6 @@ import {ActiveEntityComponent} from './components/active-entity/active-entity.co
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
->>>>>>> fcdf6b0b21466bb759fbc6680dd89bbf46cef156
 
 @NgModule({
   declarations: [

@@ -9,10 +9,12 @@
                     </a>
                 </h6>
               <ul class="nav flex-column">
-                <li *ngFor="let entity of entities" [class.selected]="entity === selectedEntity">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <li *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" (click)="onSelect(entity)">
+                  <button type="button" class="btn btn-primary" [routerLink]="" (click)="openEntityModal(entityModal)">
                     <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} Armor={{entity.armorClass}}
                   </button>
+                  <br>
+                </li>
               </ul>
              
             </div>
@@ -24,31 +26,28 @@
               <app-active-entity></app-active-entity>
               <form>
                 <input type="number" class="form-control" width="75%" placeholder="0000">
-                <button class="btn" (click)="checkTarget()">Hit/Heal</button>   
-                <button class="btn" (click)="addEffect()">Add Effect</button>
-                <button class="btn" (click)="removeEffect()">Remove Effect</button>
-
+                <button class="btn btn-outline-dark" (click)="checkTarget()">Hit/Heal</button>   
+                <button class="btn btn-outline-dark" (click)="addEffect()">Add Effect</button>
+                <button class="btn btn-outline-dark" (click)="removeEffect()">Remove Effect</button>
               </form>
           </main>
         </div>
     </div>
 
-     <!-- Modal -->
-<div class="modal fade" id="entityModal" tabindex="-1" role="dialog" aria-labelledby="entityModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="entityModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{entity.name}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
+     <!-- Modals -->
+  <ng-template #entityModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{selectedEntity.name}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-  </div>
+      <div class="modal-body">
+        <app-entity-card [entity]="selectedEntity"></app-entity-card>
+        Change Current HP
+        <input type="number" id="hpChange" class="form-control" value="{{selectedEntity.currentHp}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateEntity(selectedEntity)" (click)="c('Save click')">Close</button>
+      </div>
+    </ng-template>

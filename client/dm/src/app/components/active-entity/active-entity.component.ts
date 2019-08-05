@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-active-entity',

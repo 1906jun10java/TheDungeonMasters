@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-encounter',
@@ -9,7 +10,9 @@ import { Entity } from 'src/app/models/Entity';
 })
 export class EncounterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalService: NgbModal
+  ) {  }
 
   entities = [
     // tslint:disable-next-line: max-line-length
@@ -19,6 +22,8 @@ export class EncounterComponent implements OnInit {
     // tslint:disable-next-line: max-line-length
     {id: 1, name: 'Lich', type: 'Player', maxHp: 42, currentHp: 2, armorClass: 183, conditions: [], initiativeModifier: 4, initiativeTotal: 55}
   ];
+
+  selectedEntity: Entity;
 
   sortByInitiative(entities): void {
     entities.sort((a, b) => a.initiativeTotal > b.initiativeTotal ? -1 : a.initiativeTotal < b.initiativeTotal ? 1 : 0);
@@ -36,8 +41,16 @@ export class EncounterComponent implements OnInit {
     console.log('Effrect Removed');
   }
 
-  openModal(): void {
+  openEntityModal(entityModal) {
+    this.modalService.open(entityModal);
+  }
 
+  onSelect(entity: Entity): void {
+  this.selectedEntity = entity;
+}
+
+  updateEntity(entity: Entity): void {
+    
   }
 
   ngOnInit() {
