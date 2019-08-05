@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 
@@ -8,6 +8,8 @@ import { Entity } from 'src/app/models/Entity';
   styleUrls: ['./encounter.component.css']
 })
 export class EncounterComponent implements OnInit {
+
+  constructor() { }
 
   entities = [
     // tslint:disable-next-line: max-line-length
@@ -34,7 +36,9 @@ export class EncounterComponent implements OnInit {
     console.log('Effrect Removed');
   }
 
-  constructor() { }
+  openModal(): void {
+
+  }
 
   ngOnInit() {
     this.sortByInitiative(this.entities);

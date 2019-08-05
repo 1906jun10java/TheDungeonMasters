@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {User} from '../models/User';
@@ -13,6 +12,7 @@ const apiUrl = 'http://localhost:8080/P2';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -38,23 +38,13 @@ export class AuthService {
   login(data) {
 
     return this.http.post<User>(
-      apiUrl + '/login', {data}
-    ).pipe(map(dm => {
-      if (dm) {
-        sessionStorage.setItem('currentDungeonMaster', JSON.stringify(dm));
-        this.currentUserSubject.next(dm);
-        return dm;
-      } else {
-        console.log('Login Error');
-      }
-
-      return this.http.post<User>(
       apiUrl + '/login', data, httpOptions
     ).pipe(map(user => {
       sessionStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       this.isLoggedIn = true;
       return user;
+
     }));
   }
 }

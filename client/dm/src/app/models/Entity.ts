@@ -1,13 +1,13 @@
-import { Condition } from './Condition';
+import {Condition} from './Condition';
 
 export class Entity {
   id: number;
   name: string;
-  type: string;
-  maxHp: number;
+  entityType: string;
+  hp: number;
   currentHp: number;
   armorClass: number;
   conditions: Condition[];
-  initiativeModifier: number;
+  initiativeMod: number;
   initiativeTotal: number;
 }

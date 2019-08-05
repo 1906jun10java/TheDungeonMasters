@@ -1,9 +1,9 @@
-import { Entity } from './Entity';
+import {Entity} from './Entity';
 
 export class Campaign {
-  id: number;
-  name: string;
-  entities: Entity[];
+  campaignId: number;
+  campaignName: string;
+  activeEntities: Entity[];
   currentRound: number;
   currentTurn: number;
   status: string;
