@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {CampaignService} from '../../services/campaign.service';
 import {Campaign} from '../../models/Campaign';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-campaign-view',
@@ -14,7 +15,8 @@ export class CampaignViewComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private campaignService: CampaignService
+    private campaignService: CampaignService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -38,5 +40,9 @@ export class CampaignViewComponent implements OnInit {
         return;
       }
     });
+  }
+
+  openAddEntityModal(addEntityModal) {
+    this.modalService.open(addEntityModal);
   }
 }

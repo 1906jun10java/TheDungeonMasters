@@ -1,3 +1,8 @@
 .card {
-  width: 200px;
+  width: 10em;
+  background-color: #f8f9fa;
+}
+
+.card:hover {
+  background-color: white;
 }
