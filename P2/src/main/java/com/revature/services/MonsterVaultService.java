@@ -23,7 +23,9 @@ public class MonsterVaultService {
 	}
 	
 	public void addMonster(MonsterVault monsterVault) {
-		md.addMonster(monsterVault);
+		MonsterVault temp = new MonsterVault();
+		temp = monsterVault;
+		md.addMonster(temp);
 	}
 
 }

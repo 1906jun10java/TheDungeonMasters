@@ -22,8 +22,8 @@
             </form>
         </div>
 
-        <div id="monster-table" class="card-columns">
-            <table class="card" *ngFor="let monster of monsters">
+        <div layout-fill flex id="monster-table" class="card-columns">
+            <table class="card" *ngFor="let monster of monsters" (click)="selectMonster(monster.id)">
                 <th>{{monster['name']}}</th>
                 <tr>
                     <td>HitPoints</td>

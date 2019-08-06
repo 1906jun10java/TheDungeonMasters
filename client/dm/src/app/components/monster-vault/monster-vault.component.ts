@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Entity } from '../../models/Entity';
 import { MonsterService } from '../../services/monster.service';
@@ -10,6 +10,7 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./monster-vault.component.css']
 })
 export class MonsterVaultComponent implements OnInit {
+  @Input() selectedMonster: Entity;
   monsters: Entity[] = null;
   isShown = false;
   newMonsterForm: FormGroup;
@@ -45,7 +46,7 @@ export class MonsterVaultComponent implements OnInit {
   }
 
   toggle(){
-    !this.isShown ? this.hide() : this.show();
+    this.isShown ? this.hide() : this.show();
   }
 
   show() {
@@ -60,12 +61,27 @@ export class MonsterVaultComponent implements OnInit {
     this.isShown = false;
   }
 
-  //TODO make monster from form
+  selectMonster(monsterId: number){
+    this.monsters.forEach(m =>{
+      if(m.id === monsterId){
+        this.selectedMonster = m;
+        console.log(this.selectedMonster);
+        return;
+      }
+    });
+  }
+
   createMonster(){
     const formData = this.newMonsterForm.getRawValue();
-    console.log(formData);
-    postMonster: Entity;
-    
+    let newMonster: Entity = new Entity();
+    newMonster.name = formData.name;
+    newMonster.hp = formData.hp;
+    newMonster.armorClass = formData.armorClass;
+    newMonster.initiativeMod = formData.initiativeMod;
+    newMonster.currentHp = formData.hp;
+    newMonster.initiativeTotal = formData.initiativeMod;
+    newMonster.entityType = 'monster';
+    this.monsterService.addMonster(newMonster);
   }
 
 }

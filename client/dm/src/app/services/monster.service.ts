@@ -5,8 +5,9 @@ import {Entity} from '../models/Entity';
 
 const url = 'http://localhost:8080/P2/monsterVault';
 
-const httpHeaders = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+//response type is text.  Yes, it sits outside of the other headers.
+const headers = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'}), responseType: 'text'
 };
 
 //for adding a monster to the vault
@@ -21,9 +22,10 @@ export class MonsterService {
     return this.http.get<Entity[]>(url + '/returnAll');
   }
 
+  //Post reqs have to subscribe
   addMonster(data){
-    return this.http.post<Entity>(
-      url + '/addMonster', data, httpHeaders)
+    return this.http.post<any>(
+      url + '/addMonster', data, headers).subscribe(r=>{});
   }
 
 }

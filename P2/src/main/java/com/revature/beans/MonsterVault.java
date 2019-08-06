@@ -54,6 +54,22 @@ public class MonsterVault {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getCurrentHp() {
+		return currentHp;
+	}
+
+	public void setCurrentHp(int currentHp) {
+		this.currentHp = currentHp;
+	}
+
+	public int getInitiativeTotal() {
+		return initiativeTotal;
+	}
+
+	public void setInitiativeTotal(int initiativeTotal) {
+		this.initiativeTotal = initiativeTotal;
+	}
 
 	public String getName() {
 		return name;

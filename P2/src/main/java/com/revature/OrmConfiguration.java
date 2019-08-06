@@ -33,7 +33,6 @@ public class OrmConfiguration {
 		return dsrc;
 	}
 	
-	@Bean
 	public Properties getHibernateProps() {
 		Properties props = new Properties();
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
