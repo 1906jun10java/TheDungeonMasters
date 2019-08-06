@@ -27,7 +27,6 @@ public class ActiveEntityController {
 
 	@RequestMapping("/returnAllEntities")
 	public ResponseEntity<List<ActiveEntity>> returnActiveEntitys(@RequestBody Campaign campaign){
-		
 		try {
 			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(campaign),HttpStatus.OK);
 		}catch(Exception e) {
