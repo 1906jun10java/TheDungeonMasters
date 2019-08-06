@@ -27,7 +27,6 @@ public class ActiveEntityController {
 
 	@RequestMapping("/returnAllEntities")
 	public ResponseEntity<List<ActiveEntity>> returnActiveEntitys(@RequestBody Campaign campaign){
-		
 		try {
 			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(campaign),HttpStatus.OK);
 		}catch(Exception e) {
@@ -36,7 +35,7 @@ public class ActiveEntityController {
 	}
 	
 	@RequestMapping(value="/saveEntities", method=RequestMethod.POST)
-	public ResponseEntity<String> storeEntities(ActiveEntity activeEntities){
+	public ResponseEntity<String> storeEntities(@RequestBody ActiveEntity activeEntities){
 		ResponseEntity<String> response = null;
 		try {
 			aes.storeActiveEntities(activeEntities);
