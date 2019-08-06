@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.ActiveEntity;
 import com.revature.beans.Campaign;
 import com.revature.services.ActiveEntityService;
@@ -26,22 +27,28 @@ public class ActiveEntityController {
 	}
 
 	@RequestMapping("/returnAllEntities")
-	public ResponseEntity<List<ActiveEntity>> returnActiveEntitys(@RequestBody Campaign campaign){
+	public ResponseEntity<List<ActiveEntity>> returnActiveEntitys(@RequestBody Campaign campaign) {
 		try {
-			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(campaign),HttpStatus.OK);
-		}catch(Exception e) {
+			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(campaign), HttpStatus.OK);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@RequestMapping(value="/saveEntities", method=RequestMethod.POST)
-	public ResponseEntity<String> storeEntities(@RequestBody ActiveEntity activeEntities){
+
+	@RequestMapping(value = "/saveEntities", method = RequestMethod.POST)
+	public ResponseEntity<String> storeEntities(@RequestBody String rawJson) {
+		System.out.println(rawJson);
+		ObjectMapper mapper = new ObjectMapper();
 		ResponseEntity<String> response = null;
+		ActiveEntity activeEntities;
 		try {
+			activeEntities = mapper.readValue(rawJson, ActiveEntity.class);
+			System.out.println(activeEntities.toString());
 			aes.storeActiveEntities(activeEntities);
-			response = new ResponseEntity<>("Entities are added",HttpStatus.OK);
-		}catch(Exception e) {
-			response = new ResponseEntity<>("Entites are not added",HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<>("Entities are added", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new ResponseEntity<>("Entites are not added", HttpStatus.BAD_REQUEST);
 		}
 		return response;
 	}
