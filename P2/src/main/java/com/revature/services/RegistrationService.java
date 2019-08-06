@@ -20,15 +20,26 @@ public class RegistrationService {
 	}
 	
 	//Split our form data into a new user and a new credentials object
-	public void addNewUser(JsonObject body) {
+	public boolean addNewUser(JsonObject body) {
 		System.out.println(body);
 		User temp = new User();
 		Credentials creds = new Credentials();
 		temp.setLastName(body.getString("lastName"));
 		temp.setFirstName(body.getString("firstName"));
 		temp.setEmail(body.getString("email"));
+		if(temp.getEmail().isEmpty()) {
+			return false;
+		}
 		creds.setUser(temp);
 		creds.setPassword(body.getString("password"));
+		if(creds.getPassword().isEmpty()) {
+			return false;
+		}
+		if(ld.getUserByEmail(temp.getEmail()) != null) {
+			System.out.println(ld.getUserByEmail(temp.getEmail()));
+			return false;
+		}
 		ld.createUser(temp, creds);
+		return true;
 	}
 }

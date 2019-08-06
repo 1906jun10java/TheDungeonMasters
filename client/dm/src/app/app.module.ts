@@ -11,6 +11,7 @@ import {ActiveEntityComponent} from './components/active-entity/active-entity.co
 import {CampaignViewComponent} from './components/campaign-view/campaign-view.component';
 import {NavComponent} from './components/nav/nav.component';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {EntityCardComponent} from './components/entity-card/entity-card.componen
     ActiveEntityComponent,
     CampaignViewComponent,
     NavComponent,
-    EntityCardComponent
+    EntityCardComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

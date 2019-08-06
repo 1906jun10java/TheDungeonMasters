@@ -32,7 +32,7 @@ public class LoginDAO {
 	
 	//email is annotated as a natural id
 	public User getUserByEmail(String email) {
-		return sf.getCurrentSession().byNaturalId(User.class).using("email", email).load();
+		return sf.getCurrentSession().byNaturalId(User.class).using("Email", email).load();
 	}
 	
 	public Credentials getCredentials(int id) {

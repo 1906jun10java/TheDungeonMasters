@@ -34,7 +34,10 @@ public class RegistrationController {
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
 		try {
-			rs.addNewUser(json);
+			if(!rs.addNewUser(json)) {
+				System.out.println("The email or password fields were null, don't panic."); //custom exception maybe
+				throw new Exception();
+			}
 			response = new ResponseEntity<>("New User registered, congratulations, nerd.", HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
