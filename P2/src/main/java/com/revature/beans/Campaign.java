@@ -46,7 +46,7 @@ public class Campaign {
 	@Column(name = "CURRENT_ROUND")
 	private int currentRound;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
 	private User user;
 

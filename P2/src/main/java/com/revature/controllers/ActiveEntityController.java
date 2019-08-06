@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +29,10 @@ public class ActiveEntityController {
 		this.aes = aes;
 	}
 
-	@RequestMapping("/returnAllEntities")
-	public ResponseEntity<List<ActiveEntity>> returnActiveEntitys(@RequestBody Campaign campaign) {
+	@GetMapping("/return/{id}")
+	public ResponseEntity<List<ActiveEntity>> returnActiveEntities(@PathVariable("id") int id) {
 		try {
-			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(campaign), HttpStatus.OK);
+			return new ResponseEntity<>(aes.returnAllActiveEntitesByCampaign(id), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -52,4 +55,17 @@ public class ActiveEntityController {
 		}
 		return response;
 	}
+	
+	@PostMapping(value="/delete/{id}")
+	public ResponseEntity<String> deleteEntity(@PathVariable("id") int id){
+		ResponseEntity<String> response = null;
+		try {
+			this.aes.deleteActiveEntity(id);
+			response = new ResponseEntity<>("deleted", HttpStatus.OK);
+		} catch (Exception e) {
+			response = new ResponseEntity<>("Not deleted", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+	}
+	
 }

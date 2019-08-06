@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Campaign;
 import com.revature.beans.User;
 import com.revature.datalayer.CampaignDAO;
+import com.revature.datalayer.LoginDAO;
 
 @Service
 public class CampaignService {
 	
 	private CampaignDAO cDAO;
+	private LoginDAO lDAO;
 	
 	@Autowired
-	public CampaignService(CampaignDAO cDAO) {
+	public CampaignService(CampaignDAO cDAO, LoginDAO ld) {
 		this.cDAO = cDAO;
+		this.lDAO = ld;
 	}
 	
 	public Campaign getCampaignById(int id) {
@@ -50,8 +53,9 @@ public class CampaignService {
 	}
 	
 	//Can also set UserId instead of type: User
-	public void addCampaign(String cName, int round, int turn) {
+	public void addCampaign(String cName, int round, int turn, int userId) {
 		Campaign cToAdd = new Campaign(cName, round, turn);
+		cToAdd.setUser(lDAO.getUser(userId));
 		cDAO.addCampaign(cToAdd);
 	}
 	

@@ -18,10 +18,13 @@ public class ActiveEntityService {
 		this.aed = aed;
 	}
 	
-	public List<ActiveEntity> returnAllActiveEntitesByCampaign(Campaign c){
-		List<ActiveEntity> tempList = new ArrayList<>();
-		tempList = aed.getEntitiesByCampaign(c);
-		return tempList;
+	public List<ActiveEntity> returnAllActiveEntitesByCampaign(int id){
+		return aed.getEntitiesByCampaign(id);
+	}
+	
+	public void deleteActiveEntity(int id) {
+		ActiveEntity temp = aed.getEntityById(id);
+		aed.deleteEntity(temp);
 	}
 	
 	public void storeActiveEntities(ActiveEntity ae /*activeEntityList*/) {
