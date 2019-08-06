@@ -17,8 +17,8 @@ export class NavComponent implements OnInit {
   ngOnInit() {}
 
   logout() {
-    this.authService.isLoggedIn = false;
     this.authService.currentUser = null;
+    this.authService.isLoggedIn = false;
     sessionStorage.clear();
     window.location.replace('/login');
   }

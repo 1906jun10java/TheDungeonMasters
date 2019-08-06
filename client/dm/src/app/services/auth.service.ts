@@ -13,15 +13,13 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
-  isLoggedIn = false;
+  public currentUser: Observable<User> = null;
+  public isLoggedIn = false;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -30,21 +28,19 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public getCurrentDungeonMasterValue(): User {
+  public getCurrentUserValue(): User {
     return this.currentUserSubject.value;
   }
 
   // Login method
   login(data) {
-
     return this.http.post<User>(
-      apiUrl + '/login', data, httpOptions
-    ).pipe(map(user => {
+      apiUrl + '/login', data, httpOptions)
+      .pipe(map(user => {
       sessionStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
       this.isLoggedIn = true;
+      this.currentUserSubject.next(user);
       return user;
-
     }));
   }
 }

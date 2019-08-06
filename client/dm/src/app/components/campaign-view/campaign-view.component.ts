@@ -5,7 +5,7 @@ import {Campaign} from '../../models/Campaign';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
 import {EntityService} from '../../services/entity.service';
-import {first} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-campaign-view',
@@ -23,15 +23,18 @@ export class CampaignViewComponent implements OnInit {
     private authService: AuthService,
     private entityService: EntityService,
     private campaignService: CampaignService,
+    private router: Router,
     private modalService: NgbModal
   ) {}
 
   ngOnInit() {
-    this.getCampaigns();
+    if (sessionStorage.getItem('currentUser')) {
+      this.getCampaigns();
+    }
   }
 
   getCampaigns() {
-    const userId = this.authService.getCurrentDungeonMasterValue().userId;
+    const userId = this.authService.getCurrentUserValue().userId;
     this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
       if (campaigns) {
         this.campaigns = campaigns;
@@ -73,8 +76,8 @@ export class CampaignViewComponent implements OnInit {
     this.modalService.open(addMonsterModal);
   }
   saveNewEntity(modal) {
-    this.entityService.saveEntity(JSON.stringify(this.newEntity)
-    ).pipe(first()).subscribe(res => {
+    const json = JSON.stringify(this.newEntity);
+    this.entityService.saveEntity(json).subscribe(res => {
       if (res === 'Entities are added') {
         if (this.newEntity.entityType === 'player') {
           this.activePlayers.push(this.newEntity);
