@@ -12,10 +12,10 @@
           </h6>
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="" (click)="openAddEntityModal(addEntityModal)">Add Player</a>
+              <a class="nav-link" [routerLink]="" (click)="openAddPlayerModal(addEntityModal)">Add Player</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="">Add Monster</a>
+              <a class="nav-link" [routerLink]="" (click)="openAddMonsterModal(addEntityModal)">Add Monster</a>
             </li>
           </ul>
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -100,18 +100,47 @@
   </div>
 
   <!-- Modals -->
-  <ng-template #addEntityModal let-c="close" let-d="dismiss">
+  <ng-template #addEntityModal let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <h4 class="modal-title" id="modal-basic-title">Add Player</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>Hello, World!</p>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="playerName">Name:</span>
+        </div>
+        <input [(ngModel)]="newEntity.name" type="text" class="form-control" aria-label="playerName" aria-describedby="playerName">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="hp">Max HP:</span>
+        </div>
+        <input [(ngModel)]="newEntity.hp" type="text" class="form-control" aria-label="hp" aria-describedby="hp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="currentHp">Current HP:</span>
+        </div>
+        <input [(ngModel)]="newEntity.currentHp" type="text" class="form-control" aria-label="currentHp" aria-describedby="currentHp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="armorClass">Armor Class:</span>
+        </div>
+        <input [(ngModel)]="newEntity.armorClass" type="text" class="form-control" aria-label="armorClass" aria-describedby="armorClass">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="initiativeMod">Initiative Mod:</span>
+        </div>
+        <input [(ngModel)]="newEntity.initiativeMod" type="text" class="form-control" aria-label="initiativeMod" aria-describedby="initiativeMod">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="initiativeTotal">Initiative Total:</span>
+        </div>
+        <input [(ngModel)]="newEntity.initiativeTotal" type="text" class="form-control" aria-label="initiativeTotal" aria-describedby="initiativeTotal">
+      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="saveNewEntity(modal)">Save</button>
     </div>
   </ng-template>
 </div>

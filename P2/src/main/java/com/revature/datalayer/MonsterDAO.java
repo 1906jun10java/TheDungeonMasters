@@ -48,7 +48,7 @@ public class MonsterDAO {
 	}
 	
 	public void addMonster(MonsterVault m) {
-		sf.getCurrentSession().merge(m);
+		sf.getCurrentSession().saveOrUpdate(m);
 	}
 
 }
