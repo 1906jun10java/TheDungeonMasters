@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {CampaignService} from '../../services/campaign.service';
 import {Campaign} from '../../models/Campaign';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Entity} from '../../models/Entity';
 
 @Component({
   selector: 'app-campaign-view',
@@ -12,6 +13,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaign: Campaign = null;
+  newEntity: Entity;
 
   constructor(
     private authService: AuthService,
@@ -42,7 +44,18 @@ export class CampaignViewComponent implements OnInit {
     });
   }
 
-  openAddEntityModal(addEntityModal) {
-    this.modalService.open(addEntityModal);
+  openAddPlayerModal(addPlayerModal) {
+    this.newEntity = new Entity();
+    this.newEntity.entityType = 'player';
+    this.modalService.open(addPlayerModal);
+  }
+  openAddMonsterModal(addMonsterModal) {
+    this.newEntity = new Entity();
+    this.newEntity.entityType = 'monster';
+    this.modalService.open(addMonsterModal);
+  }
+  saveNewEntity(modal) {
+    // Post entity to server
+    modal.close();
   }
 }
