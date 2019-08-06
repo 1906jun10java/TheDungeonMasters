@@ -62,6 +62,6 @@ public class ActiveEntityDAO {
 	}
 	
 	public void createActiveEntity(ActiveEntity ae) {
-		sf.getCurrentSession().persist(ae);
+		sf.getCurrentSession().saveOrUpdate(ae);
 	}
 }

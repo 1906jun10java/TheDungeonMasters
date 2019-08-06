@@ -67,7 +67,7 @@ public class CampaignDAO {
 	//This, and the Active Entities DAO, will assume that the respective 
 	//ManyToOnes will have been set before being passed in
 	public void addCampaign(Campaign c) {
-		sf.getCurrentSession().persist(c);
+		sf.getCurrentSession().saveOrUpdate(c);
 	}
 	
 	public void updateCampaign(Campaign c) {

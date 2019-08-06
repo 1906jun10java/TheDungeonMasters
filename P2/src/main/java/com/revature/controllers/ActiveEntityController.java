@@ -36,7 +36,7 @@ public class ActiveEntityController {
 	}
 	
 	@RequestMapping(value="/saveEntities", method=RequestMethod.POST)
-	public ResponseEntity<String> storeEntities(ActiveEntity activeEntities){
+	public ResponseEntity<String> storeEntities(@RequestBody ActiveEntity activeEntities){
 		ResponseEntity<String> response = null;
 		try {
 			aes.storeActiveEntities(activeEntities);
