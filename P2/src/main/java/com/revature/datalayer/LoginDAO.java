@@ -40,12 +40,10 @@ public class LoginDAO {
 	}
 	
 	//This DAO also takes in a password, which will be put in the credentials table
-	public void createUser(User u, String password) {
-		Credentials temp = new Credentials(password);
+	public void createUser(User u, Credentials c) {
 		Session s = sf.getCurrentSession();
-		temp.setUser(u);
 		s.persist(u);
-		s.persist(temp);
+		s.persist(c);
 	}
 	
 	@SuppressWarnings("unchecked")

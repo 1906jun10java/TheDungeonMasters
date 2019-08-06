@@ -69,7 +69,7 @@ public class CampaignController {
 		return resp;
 	}
 	
-	//Uses saveOrUpdate ultimately, may also use it for 
+	//Use this when adding
 	@PutMapping(value="/update")
 	public ResponseEntity<String> updateCampaign(@RequestBody Campaign c) {
 		ResponseEntity<String> resp = null;
