@@ -15,6 +15,8 @@ import {first} from 'rxjs/operators';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaign: Campaign = null;
+  activePlayers: Entity[] = null;
+  activeMonsters: Entity[] = null;
   newEntity: Entity;
 
   constructor(
@@ -30,21 +32,32 @@ export class CampaignViewComponent implements OnInit {
 
   getCampaigns() {
     const userId = this.authService.getCurrentDungeonMasterValue().userId;
-    this.campaignService.getCampaign(userId).subscribe(campaigns => {
+    this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
       if (campaigns) {
         this.campaigns = campaigns;
-        this.currentCampaign = this.campaigns[0];
+        this.setCurrentCampaign(this.campaigns[0]);
       }
     });
   }
 
-  setCurrentCampaign(id: number) {
-    this.campaigns.forEach(c => {
-      if (c.campaignId === id) {
-        this.currentCampaign = c;
-        return;
+  parseEntities(campaign: Campaign) {
+    this.activePlayers = [];
+    this.activeMonsters = [];
+
+    campaign.activeEntities.forEach(e => {
+      if (e.entityType === 'player') {
+        this.activePlayers.push(e);
+      }
+      if (e.entityType === 'monster') {
+        this.activeMonsters.push(e);
       }
     });
+  }
+
+  setCurrentCampaign(campaign: Campaign) {
+    this.currentCampaign = campaign;
+    this.campaignService.setCurrentCampaign(campaign);
+    this.parseEntities(campaign);
   }
 
   openAddPlayerModal(addPlayerModal) {
@@ -60,10 +73,15 @@ export class CampaignViewComponent implements OnInit {
     this.modalService.open(addMonsterModal);
   }
   saveNewEntity(modal) {
-    console.log(JSON.stringify(this.newEntity));
     this.entityService.saveEntity(JSON.stringify(this.newEntity)
     ).pipe(first()).subscribe(res => {
-      console.log(res);
+      if (res === 'Entities are added') {
+        if (this.newEntity.entityType === 'player') {
+          this.activePlayers.push(this.newEntity);
+        } else {
+          this.activeMonsters.push(this.newEntity);
+        }
+      }
     });
     modal.close();
   }
