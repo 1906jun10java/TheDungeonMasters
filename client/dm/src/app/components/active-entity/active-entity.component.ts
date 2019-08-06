@@ -8,6 +8,13 @@ import { Entity } from 'src/app/models/Entity';
 })
 export class ActiveEntityComponent implements OnInit {
 
+  @Input()
+  entity: Entity;
+
+  updateEntity(value: number): void {
+    this.entity.currentHp = value;
+  }
+
   constructor() { }
 
   ngOnInit() {

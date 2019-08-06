@@ -61,6 +61,22 @@
   padding-left: 15px;
 }
 
+#next {
+  position: initial;
+}
+#end {
+  width: 300px;
+  height: 70px;
+  transform: translateY(100%);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: bottom;
+  align-content: bottom;
+  position: fixed;
+}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
