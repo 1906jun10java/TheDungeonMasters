@@ -29,10 +29,10 @@
               <a class="nav-link" [routerLink]="">New</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="">Resume</a>
+              <a class="nav-link" [routerLink]="">Remove</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="">Remove</a>
+              <a class="nav-link" [routerLink]="">Play</a>
             </li>
           </ul>
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -43,7 +43,7 @@
           </h6>
           <ul class="nav flex-column">
             <li *ngFor="let campaign of campaigns">
-              <a class="nav-link" (click)="setCurrentCampaign(campaign.campaignId)" [routerLink]="">{{ campaign.campaignName }}</a>
+              <a class="nav-link" (click)="setCurrentCampaign(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
             </li>
           </ul>
         </div>
@@ -51,46 +51,46 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Players:</h2>
-        <div *ngIf="currentCampaign && currentCampaign.activeEntities">
-          <div *ngFor="let entity of currentCampaign.activeEntities; let i = index">
+        <div *ngIf="activePlayers && activePlayers.length > 0">
+          <div *ngFor="let entity of activePlayers; let i = index">
             <div class="row justify-content-start" *ngIf="i%5 === 0">
-              <div class="col-lg-2" *ngIf="i < currentCampaign.activeEntities.length && entity.entityType === 'player'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i < activePlayers.length">
+                <app-entity-card [entity]="activePlayers[i]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+1 < currentCampaign.activeEntities.length && entity.entityType === 'player'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+1]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+1 < activePlayers.length">
+                <app-entity-card [entity]="activePlayers[i+1]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+2 < currentCampaign.activeEntities.length && entity.entityType === 'player'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+2]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+2 < activePlayers.length">
+                <app-entity-card [entity]="activePlayers[i+2]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+3 < currentCampaign.activeEntities.length && entity.entityType === 'player'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+3]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+3 < activePlayers.length">
+                <app-entity-card [entity]="activePlayers[i+3]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+4 < currentCampaign.activeEntities.length && entity.entityType === 'player'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+4]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+4 < activePlayers.length">
+                <app-entity-card [entity]="activePlayers[i+4]"></app-entity-card>
               </div>
             </div>
           </div>
         </div>
         <br/>
         <h2>Monsters:</h2>
-        <div *ngIf="currentCampaign && currentCampaign.activeEntities">
-          <div *ngFor="let entity of currentCampaign.activeEntities; let i = index">
+        <div *ngIf="activeMonsters && activeMonsters.length > 0">
+          <div *ngFor="let entity of activeMonsters; let i = index">
             <div class="row justify-content-start" *ngIf="i%5 === 0">
-              <div class="col-lg-2" *ngIf="i < currentCampaign.activeEntities.length && entity.entityType === 'monster'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i < activeMonsters.length">
+                <app-entity-card [entity]="activeMonsters[i]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+1 < currentCampaign.activeEntities.length && entity.entityType === 'monster'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+1]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+1 < activeMonsters.length">
+                <app-entity-card [entity]="activeMonsters[i+1]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+2 < currentCampaign.activeEntities.length && entity.entityType === 'monster'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+2]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+2 < activeMonsters.length">
+                <app-entity-card [entity]="activeMonsters[i+2]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+3 < currentCampaign.activeEntities.length && entity.entityType === 'monster'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+3]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+3 < activeMonsters.length">
+                <app-entity-card [entity]="activeMonsters[i+3]"></app-entity-card>
               </div>
-              <div class="col-lg-2" *ngIf="i+4 < currentCampaign.activeEntities.length && entity.entityType === 'monster'">
-                <app-entity-card [entity]="currentCampaign.activeEntities[i+4]"></app-entity-card>
+              <div class="col-lg-2" *ngIf="i+4 < activeMonsters.length">
+                <app-entity-card [entity]="activeMonsters[i+4]"></app-entity-card>
               </div>
             </div>
           </div>

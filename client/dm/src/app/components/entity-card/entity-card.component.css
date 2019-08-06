@@ -1,6 +1,7 @@
 .card {
-  width: 10em;
+  width: 12em;
   background-color: #f8f9fa;
+  text-align: center;
 }
 
 .card:hover {
