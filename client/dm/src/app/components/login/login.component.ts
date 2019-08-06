@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { first } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -19,11 +19,12 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {
-    // TODO
-  }
+  ) {}
 
   ngOnInit() {
+    if (sessionStorage.getItem('currentUser')) {
+      this.router.navigate(['/campaign']);
+    }
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(JSON.stringify(formData)).pipe(first()
     ).subscribe(
       data => {
-        if (this.authService.isLoggedIn) {
+        if (sessionStorage.getItem('currentUser')) {
           window.location.replace('/campaign');
         }
       },
