@@ -2,7 +2,7 @@ import {Condition} from './Condition';
 
 export class Entity {
   id: number;
-  campaginId: number;
+  campaignId: number;
   name: string;
   entityType: string;
   hp: number;

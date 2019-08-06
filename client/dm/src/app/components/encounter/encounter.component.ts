@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-encounter',
@@ -19,11 +19,11 @@ export class EncounterComponent implements OnInit {
 
   entities = [
     // tslint:disable-next-line: max-line-length
-    {id: 1, name: 'Falgathar', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 13, conditions: [], initiativeMod: 4, initiativeTotal: 22},
+    {id: 1, campaignId: 1, name: 'Falgathar', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 13, conditions: [], initiativeMod: 4, initiativeTotal: 22},
     // tslint:disable-next-line: max-line-length
-    {id: 2, name: 'Hergethat', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 27, conditions: [], initiativeMod: 4, initiativeTotal: 5},
+    {id: 2, campaignId: 1, name: 'Hergethat', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 27, conditions: [], initiativeMod: 4, initiativeTotal: 5},
     // tslint:disable-next-line: max-line-length
-    {id: 3, name: 'Lich', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 183, conditions: [], initiativeMod: 4, initiativeTotal: 55}
+    {id: 3, campaignId: 1, name: 'Lich', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 183, conditions: [], initiativeMod: 4, initiativeTotal: 55}
   ];
 
   selectedEntity: Entity;
@@ -61,7 +61,7 @@ export class EncounterComponent implements OnInit {
 
   addMonster(): void {
     // tslint:disable-next-line: max-line-length
-    this.entities.push({id: 3, name: 'Monster', entityType: 'Monster', hp: 58, currentHp: 26, armorClass: 55, conditions: [], initiativeMod: 5, initiativeTotal: 46});
+    this.entities.push({id: 3, campaignId: 1, name: 'Monster', entityType: 'Monster', hp: 58, currentHp: 26, armorClass: 55, conditions: [], initiativeMod: 5, initiativeTotal: 46});
     this.sortByInitiative(this.entities);
   }
 
