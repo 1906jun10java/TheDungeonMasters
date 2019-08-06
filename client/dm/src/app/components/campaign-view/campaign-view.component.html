@@ -118,25 +118,25 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="hp">Max HP:</span>
         </div>
-        <input type="text" class="form-control" aria-label="hp" aria-describedby="hp">
+        <input [(ngModel)]="newEntity.hp" type="text" class="form-control" aria-label="hp" aria-describedby="hp">
         <div class="input-group-prepend">
           <span class="input-group-text" id="currentHp">Current HP:</span>
         </div>
-        <input type="text" class="form-control" aria-label="currentHp" aria-describedby="currentHp">
+        <input [(ngModel)]="newEntity.currentHp" type="text" class="form-control" aria-label="currentHp" aria-describedby="currentHp">
         <div class="input-group-prepend">
           <span class="input-group-text" id="armorClass">Armor Class:</span>
         </div>
-        <input type="text" class="form-control" aria-label="armorClass" aria-describedby="armorClass">
+        <input [(ngModel)]="newEntity.armorClass" type="text" class="form-control" aria-label="armorClass" aria-describedby="armorClass">
       </div>
       <div class="input-group input-group-sm mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="initiativeMod">Initiative Mod:</span>
         </div>
-        <input type="text" class="form-control" aria-label="initiativeMod" aria-describedby="initiativeMod">
+        <input [(ngModel)]="newEntity.initiativeMod" type="text" class="form-control" aria-label="initiativeMod" aria-describedby="initiativeMod">
         <div class="input-group-prepend">
           <span class="input-group-text" id="initiativeTotal">Initiative Total:</span>
         </div>
-        <input type="text" class="form-control" aria-label="initiativeTotal" aria-describedby="initiativeTotal">
+        <input [(ngModel)]="newEntity.initiativeTotal" type="text" class="form-control" aria-label="initiativeTotal" aria-describedby="initiativeTotal">
       </div>
     </div>
     <div class="modal-footer">

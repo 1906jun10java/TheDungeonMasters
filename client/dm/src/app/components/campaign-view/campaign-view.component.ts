@@ -4,6 +4,8 @@ import {CampaignService} from '../../services/campaign.service';
 import {Campaign} from '../../models/Campaign';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
+import {EntityService} from '../../services/entity.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-campaign-view',
@@ -17,6 +19,7 @@ export class CampaignViewComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private entityService: EntityService,
     private campaignService: CampaignService,
     private modalService: NgbModal
   ) {}
@@ -47,15 +50,21 @@ export class CampaignViewComponent implements OnInit {
   openAddPlayerModal(addPlayerModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
+    this.newEntity.campaginId = this.currentCampaign.campaignId;
     this.modalService.open(addPlayerModal);
   }
   openAddMonsterModal(addMonsterModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
+    this.newEntity.campaginId = this.currentCampaign.campaignId;
     this.modalService.open(addMonsterModal);
   }
   saveNewEntity(modal) {
-    // Post entity to server
+    console.log(JSON.stringify(this.newEntity));
+    this.entityService.saveEntity(JSON.stringify(this.newEntity)
+    ).pipe(first()).subscribe(res => {
+      console.log(res);
+    });
     modal.close();
   }
 }
