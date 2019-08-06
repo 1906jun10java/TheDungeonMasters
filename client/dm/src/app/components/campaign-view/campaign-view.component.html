@@ -11,10 +11,10 @@
             </a>
           </h6>
           <ul class="nav flex-column">
-            <li class="nav-item">
+            <li *ngIf="activePlayers && activePlayers.length < 5" class="nav-item">
               <a class="nav-link" [routerLink]="" (click)="openAddPlayerModal(addEntityModal)">Add Player</a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="activeMonsters && activeMonsters.length < 10" class="nav-item">
               <a class="nav-link" [routerLink]="" (click)="openAddMonsterModal(addEntityModal)">Add Monster</a>
             </li>
           </ul>

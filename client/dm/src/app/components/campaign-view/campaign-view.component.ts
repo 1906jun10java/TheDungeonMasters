@@ -38,7 +38,11 @@ export class CampaignViewComponent implements OnInit {
     this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
       if (campaigns) {
         this.campaigns = campaigns;
-        this.setCurrentCampaign(this.campaigns[0]);
+        if (this.currentCampaign) {
+          this.setCurrentCampaign(this.currentCampaign);
+        } else {
+          this.setCurrentCampaign(this.campaigns[0]);
+        }
       }
     });
   }
@@ -58,9 +62,13 @@ export class CampaignViewComponent implements OnInit {
   }
 
   setCurrentCampaign(campaign: Campaign) {
-    this.currentCampaign = campaign;
-    this.campaignService.setCurrentCampaign(campaign);
-    this.parseEntities(campaign);
+    this.campaigns.forEach(c => {
+      if (c.campaignId === campaign.campaignId) {
+        this.currentCampaign = campaign;
+        this.campaignService.setCurrentCampaign(campaign);
+        this.parseEntities(campaign);
+      }
+    });
   }
 
   openAddPlayerModal(addPlayerModal) {
@@ -69,12 +77,14 @@ export class CampaignViewComponent implements OnInit {
     this.newEntity.campaignId = this.currentCampaign.campaignId;
     this.modalService.open(addPlayerModal);
   }
+
   openAddMonsterModal(addMonsterModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
     this.newEntity.campaignId = this.currentCampaign.campaignId;
     this.modalService.open(addMonsterModal);
   }
+
   saveNewEntity(modal) {
     const json = JSON.stringify(this.newEntity);
     this.entityService.saveEntity(json).subscribe(res => {
