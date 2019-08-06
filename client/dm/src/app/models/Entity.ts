@@ -2,9 +2,10 @@ import {Condition} from './Condition';
 
 export class Entity {
   id: number;
+  campaginId: number;
   name: string;
   entityType: string;
-  maxHp: number;
+  hp: number;
   currentHp: number;
   armorClass: number;
   conditions: Condition[];
