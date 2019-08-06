@@ -50,13 +50,13 @@ export class CampaignViewComponent implements OnInit {
   openAddPlayerModal(addPlayerModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
-    this.newEntity.campaginId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaign.campaignId;
     this.modalService.open(addPlayerModal);
   }
   openAddMonsterModal(addMonsterModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
-    this.newEntity.campaginId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaign.campaignId;
     this.modalService.open(addMonsterModal);
   }
   saveNewEntity(modal) {
