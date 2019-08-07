@@ -18,6 +18,7 @@ export class CampaignViewComponent implements OnInit {
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
+  newCampaign: Campaign;
 
   constructor(
     private authService: AuthService,
@@ -30,6 +31,8 @@ export class CampaignViewComponent implements OnInit {
   ngOnInit() {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
+    } else {
+      this.router.navigate(['/login']);
     }
   }
 
@@ -69,6 +72,24 @@ export class CampaignViewComponent implements OnInit {
         this.parseEntities(campaign);
       }
     });
+  }
+
+  openAddCampaignModal(addCampaignModal) {
+    this.newCampaign = new Campaign();
+    this.newCampaign.userId = this.authService.getCurrentUserValue().userId;
+    this.newCampaign.currentRound = 1;
+    this.newCampaign.currentTurn = 1;
+    this.modalService.open(addCampaignModal);
+  }
+
+  saveNewCampaign(modal) {
+    const json = JSON.stringify(this.newCampaign);
+    this.campaignService.saveCampaign(json).subscribe(res => {
+      if (res === 'Added Campaign: ' + this.newCampaign.campaignName) {
+        this.campaigns.push(this.newCampaign);
+      }
+    });
+    modal.close();
   }
 
   openAddPlayerModal(addPlayerModal) {

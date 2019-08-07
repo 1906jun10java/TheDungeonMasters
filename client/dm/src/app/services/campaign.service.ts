@@ -1,9 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Campaign} from '../models/Campaign';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
-// Endpoint
+// Base URL
 const apiUrl = 'http://localhost:8080/P2/campaigns/';
+
+// HTTP options
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  responseType: 'text' as 'json'
+};
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +30,17 @@ export class CampaignService {
     return this.http.get<Campaign>(apiUrl + '/campaign/' + campaignId);
   }
 
+  saveCampaign(campaign) {
+    return this.http.post(
+      apiUrl + '/add',
+      campaign, httpOptions
+    ).pipe(map(res => {
+      return res;
+    }));
+  }
+
   setCurrentCampaign(campaign: Campaign) {
     this.currentCampaign = campaign;
+    console.log(campaign);
   }
 }
