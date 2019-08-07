@@ -49,12 +49,12 @@ export class CampaignViewComponent implements OnInit {
         if (this.currentCampaignId) {
           this.campaigns.forEach(c => {
             if (c.campaignId === this.currentCampaignId) {
-              this.currentCampaign = c;
+              this.setCurrentCampaign(c);
             }
           });
         } else {
           this.currentCampaignId = this.campaigns[0].campaignId;
-          this.currentCampaign = this.campaigns[0];
+          this.setCurrentCampaign(this.campaigns[0]);
         }
       }
     });
@@ -129,11 +129,7 @@ export class CampaignViewComponent implements OnInit {
     const json = JSON.stringify(this.newEntity);
     this.entityService.saveEntity(json).subscribe(res => {
       if (res === 'Entities are added') {
-        if (this.newEntity.entityType === 'player') {
-          this.activePlayers.push(this.newEntity);
-        } else {
-          this.activeMonsters.push(this.newEntity);
-        }
+        this.getCampaigns();
       }
     });
     modal.close();
