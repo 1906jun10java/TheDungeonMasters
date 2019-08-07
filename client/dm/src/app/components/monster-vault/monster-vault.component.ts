@@ -43,9 +43,10 @@ export class MonsterVaultComponent implements OnInit {
   }
 
   refreshMonsters(){
-    this.monsterService.getAllMonsters().subscribe(response =>{
-      if(response){
-        this.monsters = response;
+    this.monsterService.getAllMonsters().subscribe(monsters =>{
+      if(monsters){
+        this.monsters = monsters;
+        console.log(this.monsters);
       }
     });
   }
@@ -86,7 +87,10 @@ export class MonsterVaultComponent implements OnInit {
     newMonster.currentHp = formData.hp;
     newMonster.initiativeTotal = formData.initiativeMod;
     newMonster.entityType = 'monster';
-    this.monsterService.addMonster(newMonster);
+    this.monsterService.addMonster(newMonster).subscribe(resp =>{
+      this.refreshMonsters();
+      //do something
+    });
   }
 
 }

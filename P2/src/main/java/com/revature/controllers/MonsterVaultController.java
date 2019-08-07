@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.revature.beans.MonsterVault;
 import com.revature.services.MonsterVaultService;
@@ -27,7 +27,7 @@ public class MonsterVaultController {
 		return new ResponseEntity<>(mvs.getAllMonsters(),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/addMonster", method=RequestMethod.POST)
+	@PostMapping(value="/addMonster")
 	public ResponseEntity<String> addMonster(@RequestBody MonsterVault monsterVault){
 		ResponseEntity<String> response = null;
 		try {
