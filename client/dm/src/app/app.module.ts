@@ -23,7 +23,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     CampaignViewComponent,
     NavComponent,
     EntityCardComponent,
-    StatusCardComponent
+    StatusCardComponent,
     RegistrationComponent
   ],
   imports: [
