@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Entity} from '../models/Entity';
 
 const url = 'http://localhost:8080/P2/monsterVault';
@@ -15,6 +15,7 @@ const headers = {
   providedIn: 'root'
 })
 export class MonsterService {
+  sendMonster = new EventEmitter<Entity>();
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +27,11 @@ export class MonsterService {
   addMonster(data){
     return this.http.post<any>(
       url + '/addMonster', data, headers);
+  }
+
+  relayMonster(monster){
+    console.log(monster);
+    this.sendMonster.emit(monster);
   }
 
 }

@@ -24,15 +24,15 @@ export class MonsterVaultComponent implements OnInit {
     private formBuilder: FormBuilder,
     private monsterService: MonsterService,
     private modalService: ModalService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.refreshMonsters();
-    if(this.modalService.subscription == undefined){
-      this.modalService.subscription = 
-      this.modalService.monsterModalEmitter.subscribe(() =>{
-        this.toggle();
-      });
+    if (this.modalService.subscription == undefined) {
+      this.modalService.subscription =
+        this.modalService.monsterModalEmitter.subscribe(() => {
+          this.toggle();
+        });
     }
     this.newMonsterForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -42,16 +42,15 @@ export class MonsterVaultComponent implements OnInit {
     });
   }
 
-  refreshMonsters(){
-    this.monsterService.getAllMonsters().subscribe(monsters =>{
-      if(monsters){
+  refreshMonsters() {
+    this.monsterService.getAllMonsters().subscribe(monsters => {
+      if (monsters) {
         this.monsters = monsters;
-        console.log(this.monsters);
       }
     });
   }
 
-  toggle(){
+  toggle() {
     this.isShown ? this.hide() : this.show();
   }
 
@@ -67,17 +66,12 @@ export class MonsterVaultComponent implements OnInit {
     this.isShown = false;
   }
 
-  selectMonster(monsterId: number){
-    this.monsters.forEach(m =>{
-      if(m.id === monsterId){
-        this.selectedMonster = m;
-        console.log(this.selectedMonster);
-        return;
-      }
-    });
+  selectMonster(monster: Entity) {
+    this.monsterService.relayMonster(monster);
+    this.hide();
   }
 
-  createMonster(){
+  createMonster() {
     const formData = this.newMonsterForm.getRawValue();
     let newMonster: Entity = new Entity();
     newMonster.name = formData.name;
@@ -87,9 +81,8 @@ export class MonsterVaultComponent implements OnInit {
     newMonster.currentHp = formData.hp;
     newMonster.initiativeTotal = formData.initiativeMod;
     newMonster.entityType = 'monster';
-    this.monsterService.addMonster(newMonster).subscribe(resp =>{
+    this.monsterService.addMonster(newMonster).subscribe(resp => {
       this.refreshMonsters();
-      //do something
     });
   }
 

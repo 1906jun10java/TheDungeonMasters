@@ -23,7 +23,7 @@
         </div>
 
         <div layout-fill flex id="monster-table" class="card-columns">
-            <app-entity-card *ngFor="let monster of monsters" (click)="selectMonster(monster.id)" [entity]="monster"></app-entity-card>
+            <app-entity-card *ngFor="let monster of monsters" (click)="selectMonster(monster)" [entity]="monster"></app-entity-card>
         </div>
     </div>
 </div>

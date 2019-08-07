@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
 import {EntityService} from '../../services/entity.service';
 import {Router} from '@angular/router';
+import { MonsterService } from '../../services/monster.service';
 
 @Component({
   selector: 'app-campaign-view',
@@ -24,13 +25,18 @@ export class CampaignViewComponent implements OnInit {
     private entityService: EntityService,
     private campaignService: CampaignService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private monsterService: MonsterService
   ) {}
 
   ngOnInit() {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
     }
+    this.monsterService.sendMonster.subscribe(monster => {
+      console.log(monster);
+      this.activeMonsters.push(monster);
+    });
   }
 
   getCampaigns() {
@@ -98,4 +104,6 @@ export class CampaignViewComponent implements OnInit {
     });
     modal.close();
   }
+
+
 }
