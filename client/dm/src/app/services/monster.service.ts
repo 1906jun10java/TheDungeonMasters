@@ -25,7 +25,7 @@ export class MonsterService {
   //Post reqs have to subscribe
   addMonster(data){
     return this.http.post<any>(
-      url + '/addMonster', data, headers).subscribe(r=>{});
+      url + '/addMonster', data, headers);
   }
 
 }

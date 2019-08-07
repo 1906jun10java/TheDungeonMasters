@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Entity } from '../../models/Entity';
 import { MonsterService } from '../../services/monster.service';
 import { ModalService } from '../../services/modal.service';
-import { EntityCardComponent } from '../active-entity';
+import { EntityCardComponent } from '../entity-card/entity-card.component';
 
 @Component({
   selector: 'monster-vault',
@@ -27,11 +27,7 @@ export class MonsterVaultComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.monsterService.getAllMonsters().subscribe(monsters =>{
-      if(monsters){
-        this.monsters = monsters;
-      }
-    });
+    this.refreshMonsters();
     if(this.modalService.subscription == undefined){
       this.modalService.subscription = 
       this.modalService.monsterModalEmitter.subscribe(() =>{
@@ -43,6 +39,14 @@ export class MonsterVaultComponent implements OnInit {
       hp: ['', Validators.required],
       armorClass: ['', Validators.required],
       initiativeMod: ['', Validators.required]
+    });
+  }
+
+  refreshMonsters(){
+    this.monsterService.getAllMonsters().subscribe(response =>{
+      if(response){
+        this.monsters = response;
+      }
     });
   }
 
@@ -83,6 +87,7 @@ export class MonsterVaultComponent implements OnInit {
     newMonster.initiativeTotal = formData.initiativeMod;
     newMonster.entityType = 'monster';
     this.monsterService.addMonster(newMonster);
+    this.refreshMonsters();
   }
 
 }
