@@ -50,8 +50,9 @@ public class CampaignService {
 	}
 	
 	//Can also set UserId instead of type: User
-	public void addCampaign(String cName, int round, int turn) {
+	public void addCampaign(String cName, int round, int turn, int userId) {
 		Campaign cToAdd = new Campaign(cName, round, turn);
+		cToAdd.setUserId(userId);
 		cDAO.addCampaign(cToAdd);
 	}
 	

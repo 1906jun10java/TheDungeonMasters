@@ -10,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 @Entity
 @Table(name = "CAMPAIGN")
@@ -45,15 +46,14 @@ public class Campaign {
 
 	@Column(name = "CURRENT_ROUND")
 	private int currentRound;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "USER_ID")
-	private User user;
+	
+	@Column(name = "USER_ID")
+	private int userId;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CAMPAIGN_ID")
 	List<ActiveEntity> activeEntities;
-
+	
 	public int getCampaignId() {
 		return campaignId;
 	}
@@ -86,12 +86,12 @@ public class Campaign {
 		this.currentRound = currentRound;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public List<ActiveEntity> getActiveEntities() {

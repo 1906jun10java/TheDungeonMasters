@@ -12,6 +12,7 @@ import {CampaignViewComponent} from './components/campaign-view/campaign-view.co
 import {NavComponent} from './components/nav/nav.component';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
 import { StatusCardComponent } from './components/status-card/status-card.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StatusCardComponent } from './components/status-card/status-card.compon
     NavComponent,
     EntityCardComponent,
     StatusCardComponent
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

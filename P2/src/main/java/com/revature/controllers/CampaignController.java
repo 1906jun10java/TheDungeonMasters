@@ -47,7 +47,7 @@ public class CampaignController {
 		return new ResponseEntity<>(cs.getCampaignsByUserId(id), HttpStatus.OK);
 	}
 	
-	//Uses sessionData to get User, campaings can only be added while logged in
+	//Uses sessionData to get User, campaigns can only be added while logged in
 	//@SessionAttribute("user") User user,
 	@PostMapping(value="/add")
 	public ResponseEntity<String> addCampaign(@RequestBody String rawJson) {
@@ -55,12 +55,12 @@ public class CampaignController {
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
-		//We will need to get the current User, or at least the user ID.
 		String cName = json.getString("campaignName");
 		int cRound = json.getInt("currentRound");
 		int cTurn = json.getInt("currentTurn");
+		int userId = json.getInt("userId"); //send userId along with campaign params
 		try {
-			cs.addCampaign(cName, cRound, cTurn);
+			cs.addCampaign(cName, cRound, cTurn, userId);
 			resp = new ResponseEntity<String>("Added Campaign: "+cName, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,13 +69,13 @@ public class CampaignController {
 		return resp;
 	}
 	
-	//Uses saveOrUpdate ultimately, may also use it for 
+	//Use this when updating a campaign's state (should include attached entities)
 	@PutMapping(value="/update")
 	public ResponseEntity<String> updateCampaign(@RequestBody Campaign c) {
 		ResponseEntity<String> resp = null;
 		//Might need to call AE service to add all Entities
 		try {
-			if(c.getUser() == null) {
+			if(c.getUserId() == 0) {
 				throw new Exception();
 			}
 			cs.updateCampaign(c);

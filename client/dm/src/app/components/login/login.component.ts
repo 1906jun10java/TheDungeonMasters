@@ -52,4 +52,8 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  gotoRegistration(){
+    window.location.replace('/registration');
+  }
 }
