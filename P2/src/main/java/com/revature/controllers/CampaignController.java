@@ -75,7 +75,7 @@ public class CampaignController {
 		ResponseEntity<String> resp = null;
 		//Might need to call AE service to add all Entities
 		try {
-			if(c.getUser() == null) {
+			if(c.getUserId() == 0) {
 				throw new Exception();
 			}
 			cs.updateCampaign(c);
