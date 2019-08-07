@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusService } from '../../services/status.service';
+import { Condition } from 'src/app/models/Condition';
 
 
 @Component({
@@ -9,14 +10,19 @@ import { StatusService } from '../../services/status.service';
 })
 export class StatusCardComponent implements OnInit {
 
-  conditions: string[];
-  private statusService: StatusService;
-
-  constructor() { }
-
-  ngOnInit() {
-  // this.conditions = this.statusService.getConditions();
-   //console.log(this.conditions);
+  constructor(private statusService: StatusService) {
   }
+
+ conditions: Condition[] = [];
+
+ getConditions() {
+   this.statusService.getConditions().subscribe(conditions => {
+      this.conditions = conditions; });
+   console.log(this.conditions);
+ }
+
+ ngOnInit() {
+   this.getConditions();
+ }
 
 }
