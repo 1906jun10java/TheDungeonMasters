@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Campaign } from 'src/app/models/Campaign';
 
 @Component({
   selector: 'app-encounter',
@@ -60,9 +61,11 @@ export class EncounterComponent implements OnInit {
   }
 
   addMonster(): void {
-    // tslint:disable-next-line: max-line-length
+    if (this.turnNumber === 1) {
+      // tslint:disable-next-line: max-line-length
     this.entities.push({id: 3, campaignId: 1, name: 'Monster', entityType: 'Monster', hp: 58, currentHp: 26, armorClass: 55, conditions: [], initiativeMod: 5, initiativeTotal: 46});
     this.sortByInitiative(this.entities);
+    }
   }
 
   passTurn(): void {
@@ -84,9 +87,14 @@ export class EncounterComponent implements OnInit {
     console.log('End encounter and pass back to campaign');
   }
 
+  getCurrentCampaign(): Campaign {
+    return new Campaign();
+  }
+
   ngOnInit() {
     this.sortByInitiative(this.entities);
     this.setActiveEntity(this.turnNumber - 1);
+    this.getCurrentCampaign();
   }
 
 }
