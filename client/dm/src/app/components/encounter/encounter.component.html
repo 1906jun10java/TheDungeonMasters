@@ -24,12 +24,10 @@
                 <h4>Current Turn</h4>
               </div>
               <app-active-entity [entity]="activeEntity"></app-active-entity>
-              <form>
-                <button class="btn btn-outline-dark" (click)="addEffect()">Add Effect</button>
-                <button class="btn btn-outline-dark" (click)="removeEffect()">Remove Effect</button>
-              </form>
               <button type="button" id="next" class="btn btn-outline-dark" (click)="passTurn()">Next Turn</button>
-              <button type="button" id="addMonster" class="btn btn-outline-dark" (click)="addMonster()">Add Monster</button>
+              <span *ngIf="turnNumber === 1">
+                <button type="button" id="addMonster" class="btn btn-outline-dark" (click)="addMonster()">Add Monster</button>
+              </span>
               <form id="end">
                   <button type="button" class="btn btn-primary" (click)="saveEncounter()">Save Encounter</button>
                   <button type="button" class="btn btn-primary" (click)="endEncounter()">End Encounter</button>
@@ -38,7 +36,7 @@
         </div>
     </div>
 
-    
+    <i class="fas fa-wizards-of-the-coast">Test</i>
 
      <!-- Modals -->
   <ng-template #entityModal let-c="close" let-d="dismiss">
@@ -52,8 +50,24 @@
         <app-entity-card [entity]="selectedEntity"></app-entity-card>
         Change Current HP (Above maximum requires manual input)
         <input type="number" #hp id="hpChange" class="form-control" min="-20" max="{{selectedEntity.hp}}" value="{{selectedEntity.currentHp}}" (click)="updateEntity(hp.value)">
+        <app-status-card></app-status-card>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
       </div>
     </ng-template>
+
+    <ng-template #addMonsterModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Select a Monster to add </h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <li *ngFor="let monster of monsters" (click)="selectMonster(monster)"></li>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
+        </div>
+      </ng-template>
