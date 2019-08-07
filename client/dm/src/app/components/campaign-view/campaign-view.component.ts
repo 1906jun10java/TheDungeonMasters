@@ -15,12 +15,12 @@ import {StatusService} from '../../services/status.service';
 })
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
-  currentCampaign: Campaign = null;
   currentCampaignId: number;
   conditions: string[] = null;
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
+  selectedEntity: Entity;
   newCampaign: Campaign;
 
   constructor(
@@ -49,12 +49,12 @@ export class CampaignViewComponent implements OnInit {
         if (this.currentCampaignId) {
           this.campaigns.forEach(c => {
             if (c.campaignId === this.currentCampaignId) {
-              this.currentCampaign = c;
+              this.setCurrentCampaignId(c);
             }
           });
         } else {
           this.currentCampaignId = this.campaigns[0].campaignId;
-          this.currentCampaign = this.campaigns[0];
+          this.setCurrentCampaignId(this.campaigns[0]);
         }
       }
     });
@@ -82,7 +82,7 @@ export class CampaignViewComponent implements OnInit {
     });
   }
 
-  setCurrentCampaign(campaign: Campaign) {
+  setCurrentCampaignId(campaign: Campaign) {
     this.campaigns.forEach(c => {
       if (c.campaignId === campaign.campaignId) {
         this.currentCampaignId = campaign.campaignId;
@@ -111,29 +111,44 @@ export class CampaignViewComponent implements OnInit {
     modal.close();
   }
 
-  openAddPlayerModal(addPlayerModal) {
+  setSelectedEntity(entity) {
+    this.selectedEntity = entity;
+  }
+
+  openEditEntityModal(editEntityModal: any, entity) {
+    this.setSelectedEntity(entity);
+    this.modalService.open(editEntityModal);
+  }
+
+  openAddPlayerModal(addPlayerModal: any) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
     this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addPlayerModal);
   }
 
-  openAddMonsterModal(addMonsterModal) {
+  openAddMonsterModal(addMonsterModal: any) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
     this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addMonsterModal);
   }
 
-  saveNewEntity(modal) {
+  saveEditedEntity(modal) {
+    const json = JSON.stringify(this.selectedEntity);
+    this.entityService.saveEntity(json).subscribe(res => {
+      if (res === 'Entities are added') {
+        this.getCampaigns();
+      }
+    });
+    modal.close();
+  }
+
+  saveEntity(modal) {
     const json = JSON.stringify(this.newEntity);
     this.entityService.saveEntity(json).subscribe(res => {
       if (res === 'Entities are added') {
-        if (this.newEntity.entityType === 'player') {
-          this.activePlayers.push(this.newEntity);
-        } else {
-          this.activeMonsters.push(this.newEntity);
-        }
+        this.getCampaigns();
       }
     });
     modal.close();

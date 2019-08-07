@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.beans.ActiveEntity;
-import com.revature.beans.Campaign;
 import com.revature.services.ActiveEntityService;
 
 @Controller
