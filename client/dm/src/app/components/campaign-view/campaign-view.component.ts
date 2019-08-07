@@ -15,7 +15,6 @@ import {StatusService} from '../../services/status.service';
 })
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
-  currentCampaign: Campaign = null;
   currentCampaignId: number;
   conditions: string[] = null;
   activePlayers: Entity[] = null;
@@ -49,12 +48,12 @@ export class CampaignViewComponent implements OnInit {
         if (this.currentCampaignId) {
           this.campaigns.forEach(c => {
             if (c.campaignId === this.currentCampaignId) {
-              this.setCurrentCampaign(c);
+              this.setCurrentCampaignId(c);
             }
           });
         } else {
           this.currentCampaignId = this.campaigns[0].campaignId;
-          this.setCurrentCampaign(this.campaigns[0]);
+          this.setCurrentCampaignId(this.campaigns[0]);
         }
       }
     });
@@ -82,7 +81,7 @@ export class CampaignViewComponent implements OnInit {
     });
   }
 
-  setCurrentCampaign(campaign: Campaign) {
+  setCurrentCampaignId(campaign: Campaign) {
     this.campaigns.forEach(c => {
       if (c.campaignId === campaign.campaignId) {
         this.currentCampaignId = campaign.campaignId;

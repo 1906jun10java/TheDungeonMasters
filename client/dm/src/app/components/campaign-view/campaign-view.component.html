@@ -43,7 +43,7 @@
           </h6>
           <ul class="nav flex-column">
             <li *ngFor="let campaign of campaigns">
-              <a class="nav-link" (click)="setCurrentCampaign(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
+              <a class="nav-link" (click)="setCurrentCampaignId(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
             </li>
           </ul>
         </div>
