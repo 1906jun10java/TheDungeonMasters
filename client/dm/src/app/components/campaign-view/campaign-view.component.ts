@@ -6,6 +6,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
 import {EntityService} from '../../services/entity.service';
 import {Router} from '@angular/router';
+import {Condition} from '../../models/Condition';
+import {StatusService} from '../../services/status.service';
 
 @Component({
   selector: 'app-campaign-view',
@@ -15,6 +17,7 @@ import {Router} from '@angular/router';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaign: Campaign = null;
+  conditions: Condition[] = null;
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
@@ -24,6 +27,7 @@ export class CampaignViewComponent implements OnInit {
     private authService: AuthService,
     private entityService: EntityService,
     private campaignService: CampaignService,
+    private statusService: StatusService,
     private router: Router,
     private modalService: NgbModal
   ) {}
@@ -31,6 +35,7 @@ export class CampaignViewComponent implements OnInit {
   ngOnInit() {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
+      this.getConditions();
     } else {
       this.router.navigate(['/login']);
     }
@@ -46,6 +51,14 @@ export class CampaignViewComponent implements OnInit {
         } else {
           this.setCurrentCampaign(this.campaigns[0]);
         }
+      }
+    });
+  }
+
+  getConditions() {
+    this.statusService.getConditions().subscribe(conditions => {
+      if (conditions) {
+        this.conditions = conditions;
       }
     });
   }
