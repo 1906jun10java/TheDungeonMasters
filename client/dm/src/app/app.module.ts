@@ -13,6 +13,7 @@ import {NavComponent} from './components/nav/nav.component';
 import { MonsterVaultComponent } from './components/monster-vault/monster-vault.component';
 import { ModalService } from './services/modal.service';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,13 @@ import {EntityCardComponent} from './components/entity-card/entity-card.componen
     ActiveEntityComponent,
     CampaignViewComponent,
     NavComponent,
+<<<<<<< HEAD
     MonsterVaultComponent,
     EntityCardComponent
+=======
+    EntityCardComponent,
+    RegistrationComponent
+>>>>>>> dev
   ],
   imports: [
     BrowserModule,

@@ -48,7 +48,11 @@ public class MonsterDAO {
 	}
 	
 	public void addMonster(MonsterVault m) {
+<<<<<<< HEAD
 		sf.getCurrentSession().save(m);
+=======
+		sf.getCurrentSession().saveOrUpdate(m);
+>>>>>>> dev
 	}
 
 }

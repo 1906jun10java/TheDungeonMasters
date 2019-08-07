@@ -56,9 +56,6 @@ public class LoginController{
 		User u  = null;
 		try {
 			u = ls.loginTest(email, password);
-			if(u != null) {
-				u.setCampaignIds(cs.getCampaignIdsByUser(u)); //Sets a list of campaign ids belonging to the user
-			}
 			response = new ResponseEntity<>(u ,HttpStatus.OK);
 		}catch(Exception e) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

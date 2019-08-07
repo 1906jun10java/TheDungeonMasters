@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -129,4 +130,19 @@ public class ActiveEntity {
 		this.conditions = conditions;
 	}
 
+	@Override
+	public String toString() {
+		return "ActiveEntity{" +
+				"id=" + id +
+				", campaignId=" + campaignId +
+				", name='" + name + '\'' +
+				", hp=" + hp +
+				", currentHp=" + currentHp +
+				", armorClass=" + armorClass +
+				", initiativeMod=" + initiativeMod +
+				", initiativeTotal=" + initiativeTotal +
+				", entityType='" + entityType + '\'' +
+				", conditions=" + conditions +
+				'}';
+	}
 }

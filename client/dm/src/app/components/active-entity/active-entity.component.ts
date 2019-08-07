@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-active-entity',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./active-entity.component.css']
 })
 export class ActiveEntityComponent implements OnInit {
+
+  @Input()
+  entity: Entity;
+
+  updateEntity(value: number): void {
+    this.entity.currentHp = value;
+  }
 
   constructor() { }
 
