@@ -15,8 +15,8 @@ export class StatusCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-   this.conditions = this.statusService.getConditions();
-   console.log(this.conditions);
+  // this.conditions = this.statusService.getConditions();
+   //console.log(this.conditions);
   }
 
 }

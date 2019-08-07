@@ -84,6 +84,7 @@ export class CampaignViewComponent implements OnInit {
 
   saveNewCampaign(modal) {
     const json = JSON.stringify(this.newCampaign);
+    console.log(json);
     this.campaignService.saveCampaign(json).subscribe(res => {
       if (res === 'Added Campaign: ' + this.newCampaign.campaignName) {
         this.campaigns.push(this.newCampaign);
