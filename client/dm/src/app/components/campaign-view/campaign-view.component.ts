@@ -20,6 +20,7 @@ export class CampaignViewComponent implements OnInit {
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
+  selectedEntity: Entity;
   newCampaign: Campaign;
 
   constructor(
@@ -110,21 +111,40 @@ export class CampaignViewComponent implements OnInit {
     modal.close();
   }
 
-  openAddPlayerModal(addPlayerModal) {
+  setSelectedEntity(entity) {
+    this.selectedEntity = entity;
+  }
+
+  openEditEntityModal(editEntityModal: any, entity) {
+    this.setSelectedEntity(entity);
+    this.modalService.open(editEntityModal);
+  }
+
+  openAddPlayerModal(addPlayerModal: any) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
     this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addPlayerModal);
   }
 
-  openAddMonsterModal(addMonsterModal) {
+  openAddMonsterModal(addMonsterModal: any) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
     this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addMonsterModal);
   }
 
-  saveNewEntity(modal) {
+  saveEditedEntity(modal) {
+    const json = JSON.stringify(this.selectedEntity);
+    this.entityService.saveEntity(json).subscribe(res => {
+      if (res === 'Entities are added') {
+        this.getCampaigns();
+      }
+    });
+    modal.close();
+  }
+
+  saveEntity(modal) {
     const json = JSON.stringify(this.newEntity);
     this.entityService.saveEntity(json).subscribe(res => {
       if (res === 'Entities are added') {
