@@ -6,7 +6,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
 import {EntityService} from '../../services/entity.service';
 import {Router} from '@angular/router';
-import {Condition} from '../../models/Condition';
 import {StatusService} from '../../services/status.service';
 
 @Component({
@@ -17,7 +16,8 @@ import {StatusService} from '../../services/status.service';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaign: Campaign = null;
-  conditions: Condition[] = null;
+  currentCampaignId: number;
+  conditions: string[] = null;
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
@@ -46,10 +46,15 @@ export class CampaignViewComponent implements OnInit {
     this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
       if (campaigns) {
         this.campaigns = campaigns;
-        if (this.currentCampaign) {
-          this.setCurrentCampaign(this.currentCampaign);
+        if (this.currentCampaignId) {
+          this.campaigns.forEach(c => {
+            if (c.campaignId === this.currentCampaignId) {
+              this.currentCampaign = c;
+            }
+          });
         } else {
-          this.setCurrentCampaign(this.campaigns[0]);
+          this.currentCampaignId = this.campaigns[0].campaignId;
+          this.currentCampaign = this.campaigns[0];
         }
       }
     });
@@ -80,7 +85,7 @@ export class CampaignViewComponent implements OnInit {
   setCurrentCampaign(campaign: Campaign) {
     this.campaigns.forEach(c => {
       if (c.campaignId === campaign.campaignId) {
-        this.currentCampaign = campaign;
+        this.currentCampaignId = campaign.campaignId;
         this.campaignService.setCurrentCampaign(campaign);
         this.parseEntities(campaign);
       }
@@ -109,14 +114,14 @@ export class CampaignViewComponent implements OnInit {
   openAddPlayerModal(addPlayerModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
-    this.newEntity.campaignId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addPlayerModal);
   }
 
   openAddMonsterModal(addMonsterModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
-    this.newEntity.campaignId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addMonsterModal);
   }
 
