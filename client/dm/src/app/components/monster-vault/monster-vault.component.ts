@@ -87,7 +87,6 @@ export class MonsterVaultComponent implements OnInit {
     newMonster.initiativeTotal = formData.initiativeMod;
     newMonster.entityType = 'monster';
     this.monsterService.addMonster(newMonster);
-    this.refreshMonsters();
   }
 
 }
