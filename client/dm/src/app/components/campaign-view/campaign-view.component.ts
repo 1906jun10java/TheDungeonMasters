@@ -6,6 +6,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Entity} from '../../models/Entity';
 import {EntityService} from '../../services/entity.service';
 import {Router} from '@angular/router';
+import {StatusService} from '../../services/status.service';
 
 @Component({
   selector: 'app-campaign-view',
@@ -15,6 +16,8 @@ import {Router} from '@angular/router';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaign: Campaign = null;
+  currentCampaignId: number;
+  conditions: string[] = null;
   activePlayers: Entity[] = null;
   activeMonsters: Entity[] = null;
   newEntity: Entity;
@@ -24,6 +27,7 @@ export class CampaignViewComponent implements OnInit {
     private authService: AuthService,
     private entityService: EntityService,
     private campaignService: CampaignService,
+    private statusService: StatusService,
     private router: Router,
     private modalService: NgbModal
   ) {}
@@ -31,6 +35,7 @@ export class CampaignViewComponent implements OnInit {
   ngOnInit() {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
+      this.getConditions();
     } else {
       this.router.navigate(['/login']);
     }
@@ -41,11 +46,24 @@ export class CampaignViewComponent implements OnInit {
     this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
       if (campaigns) {
         this.campaigns = campaigns;
-        if (this.currentCampaign) {
-          this.setCurrentCampaign(this.currentCampaign);
+        if (this.currentCampaignId) {
+          this.campaigns.forEach(c => {
+            if (c.campaignId === this.currentCampaignId) {
+              this.currentCampaign = c;
+            }
+          });
         } else {
-          this.setCurrentCampaign(this.campaigns[0]);
+          this.currentCampaignId = this.campaigns[0].campaignId;
+          this.currentCampaign = this.campaigns[0];
         }
+      }
+    });
+  }
+
+  getConditions() {
+    this.statusService.getConditions().subscribe(conditions => {
+      if (conditions) {
+        this.conditions = conditions;
       }
     });
   }
@@ -67,7 +85,7 @@ export class CampaignViewComponent implements OnInit {
   setCurrentCampaign(campaign: Campaign) {
     this.campaigns.forEach(c => {
       if (c.campaignId === campaign.campaignId) {
-        this.currentCampaign = campaign;
+        this.currentCampaignId = campaign.campaignId;
         this.campaignService.setCurrentCampaign(campaign);
         this.parseEntities(campaign);
       }
@@ -96,14 +114,14 @@ export class CampaignViewComponent implements OnInit {
   openAddPlayerModal(addPlayerModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'player';
-    this.newEntity.campaignId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addPlayerModal);
   }
 
   openAddMonsterModal(addMonsterModal) {
     this.newEntity = new Entity();
     this.newEntity.entityType = 'monster';
-    this.newEntity.campaignId = this.currentCampaign.campaignId;
+    this.newEntity.campaignId = this.currentCampaignId;
     this.modalService.open(addMonsterModal);
   }
 
