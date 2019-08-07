@@ -16,8 +16,8 @@ export class StatusService {
 
   getConditions() {
     return this.http.get<string[]>(apiUrl + '/all').pipe(
-      map(condition => {
-        conditions.add(condition);
-      }));
+      //map(condition => {
+        //conditions.add(condition);})
+      );
   }
 }
