@@ -23,13 +23,9 @@ import { RegistrationComponent } from './components/registration/registration.co
     ActiveEntityComponent,
     CampaignViewComponent,
     NavComponent,
-<<<<<<< HEAD
     MonsterVaultComponent,
-    EntityCardComponent
-=======
     EntityCardComponent,
     RegistrationComponent
->>>>>>> dev
   ],
   imports: [
     BrowserModule,

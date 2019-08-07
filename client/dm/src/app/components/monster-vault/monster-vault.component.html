@@ -23,21 +23,7 @@
         </div>
 
         <div layout-fill flex id="monster-table" class="card-columns">
-            <table class="card" *ngFor="let monster of monsters" (click)="selectMonster(monster.id)">
-                <th>{{monster['name']}}</th>
-                <tr>
-                    <td>HitPoints</td>
-                    <td>{{monster['hp']}}</td>
-                </tr>
-                <tr>
-                    <td>ArmorClass</td>
-                    <td>{{monster['armorClass']}}</td>
-                </tr>
-                <tr>
-                    <td>Initiative Modifier</td>
-                    <td>{{monster['initiativeMod']}}</td>
-                </tr>
-            </table>
+            <app-entity-card *ngFor="let monster of monsters" (click)="selectMonster(monster.id)" [entity]="monster"></app-entity-card>
         </div>
     </div>
 </div>

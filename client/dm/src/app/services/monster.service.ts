@@ -7,7 +7,7 @@ const url = 'http://localhost:8080/P2/monsterVault';
 
 //response type is text.  Yes, it sits outside of the other headers.
 const headers = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'}), responseType: 'text'
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'}), responseType: 'text' as 'json'
 };
 
 //for adding a monster to the vault

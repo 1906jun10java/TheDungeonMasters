@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Entity } from '../../models/Entity';
 import { MonsterService } from '../../services/monster.service';
 import { ModalService } from '../../services/modal.service';
+import { EntityCardComponent } from '../active-entity';
 
 @Component({
   selector: 'monster-vault',
@@ -10,7 +11,7 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./monster-vault.component.css']
 })
 export class MonsterVaultComponent implements OnInit {
-  @Input() selectedMonster: Entity;
+  selectedMonster: Entity;
   monsters: Entity[] = null;
   isShown = false;
   newMonsterForm: FormGroup;
