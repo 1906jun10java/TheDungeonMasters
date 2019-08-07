@@ -41,6 +41,5 @@ export class CampaignService {
 
   setCurrentCampaign(campaign: Campaign) {
     this.currentCampaign = campaign;
-    console.log(campaign);
   }
 }
