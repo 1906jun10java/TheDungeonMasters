@@ -1,24 +1,3 @@
- <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-    
     <div class="container-fluid">
         <div class="row">
           <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -30,10 +9,11 @@
                     </a>
                 </h6>
               <ul class="nav flex-column">
-                <li *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" data-toggle="modal" data-target="#entityModal">
-                  <button type="button" data-toggle="modal" data-target="#entityModal">
-                    <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} AC = {{entity.armorClass}}
+                <li #turnList *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" (click)="onSelect(entity)">
+                  <button type="button" class="btn btn-primary" [routerLink]="" (click)="openEntityModal(entityModal)">
+                    <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} Armor={{entity.armorClass}}
                   </button>
+                </li>
               </ul>
              
             </div>
@@ -41,14 +21,39 @@
           <main role="main">
               <div class="text-center mb-4">
                 <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
+                <h4>Current Turn</h4>
               </div>
-              <app-active-entity></app-active-entity>
+              <app-active-entity [entity]="activeEntity"></app-active-entity>
               <form>
-                <input type="number" class="form-control" width="75%" placeholder="0000">
-                <button (click)="checkTarget()">Hit/Heal</button>   
-                <button (click)="addEffect()">Add Effect</button>
-                <button (click)="removeEffect()">Remove Effect</button>
+                <button class="btn btn-outline-dark" (click)="addEffect()">Add Effect</button>
+                <button class="btn btn-outline-dark" (click)="removeEffect()">Remove Effect</button>
               </form>
+              <button type="button" id="next" class="btn btn-outline-dark" (click)="passTurn()">Next Turn</button>
+              <button type="button" id="addMonster" class="btn btn-outline-dark" (click)="addMonster()">Add Monster</button>
+              <form id="end">
+                  <button type="button" class="btn btn-primary" (click)="saveEncounter()">Save Encounter</button>
+                  <button type="button" class="btn btn-primary" (click)="endEncounter()">End Encounter</button>
+                </form>
           </main>
         </div>
     </div>
+
+    
+
+     <!-- Modals -->
+  <ng-template #entityModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{selectedEntity.name}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-entity-card [entity]="selectedEntity"></app-entity-card>
+        Change Current HP (Above maximum requires manual input)
+        <input type="number" #hp id="hpChange" class="form-control" min="-20" max="{{selectedEntity.hp}}" value="{{selectedEntity.currentHp}}" (click)="updateEntity(hp.value)">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
+      </div>
+    </ng-template>

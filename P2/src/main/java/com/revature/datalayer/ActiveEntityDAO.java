@@ -31,12 +31,12 @@ public class ActiveEntityDAO {
 		return sf.getCurrentSession().get(ActiveEntity.class, id);
 	}
 	
-	public List<ActiveEntity> getEntitiesByCampaign(Campaign c){
+	public List<ActiveEntity> getEntitiesByCampaign(int id){
 		Session s = sf.getCurrentSession();
 		CriteriaBuilder cb = s.getCriteriaBuilder();
 		CriteriaQuery<ActiveEntity> cq = cb.createQuery(ActiveEntity.class);
 		Root<ActiveEntity> root = cq.from(ActiveEntity.class);
-		cq.select(root).where(cb.equal(root.get("containingCampaign"), c));
+		cq.select(root).where(cb.equal(root.get("campaignId"), id));
 		Query<ActiveEntity> q = s.createQuery(cq);
 		return q.getResultList();
 	}
@@ -62,6 +62,6 @@ public class ActiveEntityDAO {
 	}
 	
 	public void createActiveEntity(ActiveEntity ae) {
-		sf.getCurrentSession().persist(ae);
+		sf.getCurrentSession().merge(ae);
 	}
 }

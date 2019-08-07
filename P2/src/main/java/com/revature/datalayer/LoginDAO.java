@@ -32,7 +32,7 @@ public class LoginDAO {
 	
 	//email is annotated as a natural id
 	public User getUserByEmail(String email) {
-		return sf.getCurrentSession().byNaturalId(User.class).using("email", email).load();
+		return sf.getCurrentSession().byNaturalId(User.class).using("Email", email).load();
 	}
 	
 	public Credentials getCredentials(int id) {
@@ -40,12 +40,10 @@ public class LoginDAO {
 	}
 	
 	//This DAO also takes in a password, which will be put in the credentials table
-	public void createUser(User u, String password) {
-		Credentials temp = new Credentials(password);
+	public void createUser(User u, Credentials c) {
 		Session s = sf.getCurrentSession();
-		temp.setUser(u);
 		s.persist(u);
-		s.persist(temp);
+		s.persist(c);
 	}
 	
 	@SuppressWarnings("unchecked")

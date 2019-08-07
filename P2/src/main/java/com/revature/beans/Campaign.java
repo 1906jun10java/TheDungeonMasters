@@ -46,13 +46,12 @@ public class Campaign {
 	@Column(name = "CURRENT_ROUND")
 	private int currentRound;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")
 	private User user;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "CAMPAIGN_ACTIVE_ENTITIES", joinColumns = {
-			@JoinColumn(name = "CAMPAIGN_FK") }, inverseJoinColumns = { @JoinColumn(name = "ACTIVE_ENTITY_FK") })
+	@JoinColumn(name = "CAMPAIGN_ID")
 	List<ActiveEntity> activeEntities;
 
 	public int getCampaignId() {

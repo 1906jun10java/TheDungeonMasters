@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -12,6 +13,8 @@ import {NavComponent} from './components/nav/nav.component';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
 import { LogComponent } from './components/log/log.component';
 import { LogService } from './services/log.service';
+import { RegistrationComponent } from './components/registration/registration.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,14 +24,16 @@ import { LogService } from './services/log.service';
     CampaignViewComponent,
     NavComponent,
     EntityCardComponent,
-    LogComponent
+    LogComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [LogService],
   bootstrap: [AppComponent]

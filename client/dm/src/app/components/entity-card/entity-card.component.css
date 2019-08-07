@@ -1,3 +1,9 @@
 .card {
-  width: 200px;
+  width: 12em;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.card:hover {
+  background-color: white;
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -7,6 +7,8 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  @Input()
+  links: {};
 
   constructor(
     private authService: AuthService
@@ -15,8 +17,8 @@ export class NavComponent implements OnInit {
   ngOnInit() {}
 
   logout() {
-    this.authService.isLoggedIn = false;
     this.authService.currentUser = null;
+    this.authService.isLoggedIn = false;
     sessionStorage.clear();
     window.location.replace('/login');
   }
