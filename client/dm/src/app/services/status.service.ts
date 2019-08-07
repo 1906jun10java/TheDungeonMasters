@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Condition } from '../models/Condition';
+import { map } from 'rxjs/operators';
 
 const apiUrl = 'http://localhost:8080/P2/conditions/';
 
@@ -14,10 +15,15 @@ export class StatusService {
     private http: HttpClient
   ) {}
 
-  getConditions() {
+  getConditions(): string[] {
+    this.setConditions();
+    return this.conditions;
+  }
+
+  setConditions() {
     return this.http.get<string[]>(apiUrl + '/all').pipe(
       map(condition => {
-        conditions.add(condition);
+        this.conditions = condition;
       }));
   }
 }
