@@ -3,7 +3,7 @@
           <h5 class="card-title">Status Effects</h5>
           <ul *ngIf="conditions.length > 0" class="card-text">
             <li *ngFor="let condition of conditions">
-              <span><input type="checkbox" (click)="addCondition(condition, entity)">{{condition}}</span>
+              <span><input type="checkbox" (click)="toggleCondition(condition, entity)">{{condition}}</span>
             </li>
           </ul>
         </div>

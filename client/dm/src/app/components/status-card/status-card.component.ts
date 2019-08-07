@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StatusService } from '../../services/status.service';
-import { Condition } from 'src/app/models/Condition';
 import { Entity } from 'src/app/models/Entity';
 
 
@@ -14,7 +13,7 @@ export class StatusCardComponent implements OnInit {
   @Input()
   entity: Entity;
 
-  conditions: Condition[] = [];
+  conditions: string[] = [];
 
 
   constructor(private statusService: StatusService) {
@@ -29,8 +28,13 @@ export class StatusCardComponent implements OnInit {
     this.conditions = conditions; });
 }
 
-  addCondition(condition, entity) {
-
+  toggleCondition(condition, entity) {
+    if (entity.conditions.includes(condition)) {
+      entity.conditions.splice(entity.conditions.indexOf(condition), 1);
+    } else {
+      entity.conditions.push(condition);
+    }
+    console.log(entity);
   }
 
 }

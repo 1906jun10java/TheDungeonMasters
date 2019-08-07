@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Campaign } from 'src/app/models/Campaign';
+import { CampaignService } from 'src/app/services/campaign.service';
 
 @Component({
   selector: 'app-encounter',
@@ -15,17 +16,11 @@ export class EncounterComponent implements OnInit {
   entity: Entity;
 
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private campaignService: CampaignService
   ) {  }
 
-  entities = [
-    // tslint:disable-next-line: max-line-length
-    {id: 1, campaignId: 1, name: 'Falgathar', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 13, conditions: [], initiativeMod: 4, initiativeTotal: 22},
-    // tslint:disable-next-line: max-line-length
-    {id: 2, campaignId: 1, name: 'Hergethat', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 27, conditions: [], initiativeMod: 4, initiativeTotal: 5},
-    // tslint:disable-next-line: max-line-length
-    {id: 3, campaignId: 1, name: 'Lich', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 183, conditions: [], initiativeMod: 4, initiativeTotal: 55}
-  ];
+  entities = this.campaignService.currentCampaign.activeEntities;
 
   selectedEntity: Entity;
   activeEntity: Entity;
