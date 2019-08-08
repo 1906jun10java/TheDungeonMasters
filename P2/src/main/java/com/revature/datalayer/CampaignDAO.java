@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,6 +73,11 @@ public class CampaignDAO {
 	
 	public void updateCampaign(Campaign c) {
 		sf.getCurrentSession().saveOrUpdate(c);
+	}
+	
+	public void deleteCampaignById(int id) {
+		Session s = sf.getCurrentSession();
+		s.delete(s.get(Campaign.class, id));
 	}
 	
 }

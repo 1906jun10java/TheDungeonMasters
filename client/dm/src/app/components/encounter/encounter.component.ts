@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Campaign } from 'src/app/models/Campaign';
+import { CampaignService } from 'src/app/services/campaign.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-encounter',
@@ -14,17 +17,12 @@ export class EncounterComponent implements OnInit {
   entity: Entity;
 
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private campaignService: CampaignService,
+    private router: Router
   ) {  }
 
-  entities = [
-    // tslint:disable-next-line: max-line-length
-    {id: 1, campaignId: 1, name: 'Falgathar', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 13, conditions: [], initiativeMod: 4, initiativeTotal: 22},
-    // tslint:disable-next-line: max-line-length
-    {id: 2, campaignId: 1, name: 'Hergethat', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 27, conditions: [], initiativeMod: 4, initiativeTotal: 5},
-    // tslint:disable-next-line: max-line-length
-    {id: 3, campaignId: 1, name: 'Lich', entityType: 'Player', hp: 42, currentHp: 2, armorClass: 183, conditions: [], initiativeMod: 4, initiativeTotal: 55}
-  ];
+  entities = this.campaignService.currentCampaign.activeEntities;
 
   selectedEntity: Entity;
   activeEntity: Entity;
@@ -39,16 +37,12 @@ export class EncounterComponent implements OnInit {
     entities.sort((a, b) => a.initiativeTotal > b.initiativeTotal ? -1 : a.initiativeTotal < b.initiativeTotal ? 1 : 0);
   }
 
-  addEffect(): any {
-    console.log('Effect Added');
-  }
-
-  removeEffect(): any {
-    console.log('Effrect Removed');
-  }
-
   openEntityModal(entityModal) {
     this.modalService.open(entityModal);
+  }
+
+  openMonsterModal(addMonsterModal) {
+    this.modalService.open(addMonsterModal);
   }
 
   onSelect(entity: Entity): void {
@@ -59,10 +53,11 @@ export class EncounterComponent implements OnInit {
     this.selectedEntity.currentHp = value;
   }
 
-  addMonster(): void {
-    // tslint:disable-next-line: max-line-length
-    this.entities.push({id: 3, campaignId: 1, name: 'Monster', entityType: 'Monster', hp: 58, currentHp: 26, armorClass: 55, conditions: [], initiativeMod: 5, initiativeTotal: 46});
+  addMonster(monster): void {
+    if (this.turnNumber === 1) {
+    this.entities.push(monster);
     this.sortByInitiative(this.entities);
+    }
   }
 
   passTurn(): void {
@@ -81,12 +76,22 @@ export class EncounterComponent implements OnInit {
   }
 
   endEncounter(): void {
-    console.log('End encounter and pass back to campaign');
+    this.router.navigate(['/campaign']);
+  }
+
+  getCurrentCampaign(): Campaign {
+    return this.campaignService.currentCampaign;
   }
 
   ngOnInit() {
-    this.sortByInitiative(this.entities);
-    this.setActiveEntity(this.turnNumber - 1);
+    if (sessionStorage.getItem('currentUser')) {
+      this.sortByInitiative(this.entities);
+      this.setActiveEntity(this.turnNumber - 1);
+      this.getCurrentCampaign();
+    } else {
+      this.router.navigate(['/login']);
+    }
+   
   }
 
 }

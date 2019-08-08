@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     ).subscribe(
       data => {
         if (sessionStorage.getItem('currentUser')) {
-          window.location.replace('/campaign');
+          this.router.navigate(['/campaign']);
         }
       },
       error => {
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  gotoRegistration(){
-    window.location.replace('/registration');
+  gotoRegistration() {
+    this.router.navigate(['/registration']);
   }
 }

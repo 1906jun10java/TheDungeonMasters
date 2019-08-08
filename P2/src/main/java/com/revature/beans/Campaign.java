@@ -10,12 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 @Entity
 @Table(name = "CAMPAIGN")
@@ -50,7 +48,7 @@ public class Campaign {
 	@Column(name = "USER_ID")
 	private int userId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
 	@JoinColumn(name = "CAMPAIGN_ID")
 	List<ActiveEntity> activeEntities;
 	

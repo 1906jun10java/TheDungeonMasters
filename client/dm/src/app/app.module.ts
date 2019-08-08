@@ -13,6 +13,7 @@ import {NavComponent} from './components/nav/nav.component';
 import { MonsterVaultComponent } from './components/monster-vault/monster-vault.component';
 import { ModalService } from './services/modal.service';
 import {EntityCardComponent} from './components/entity-card/entity-card.component';
+import { StatusCardComponent } from './components/status-card/status-card.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RegistrationComponent } from './components/registration/registration.co
     NavComponent,
     MonsterVaultComponent,
     EntityCardComponent,
+    StatusCardComponent,
     RegistrationComponent
   ],
   imports: [

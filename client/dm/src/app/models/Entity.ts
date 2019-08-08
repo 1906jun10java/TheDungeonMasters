@@ -1,5 +1,3 @@
-import {Condition} from './Condition';
-
 export class Entity {
   id: number;
   campaignId: number;
@@ -8,7 +6,7 @@ export class Entity {
   hp: number;
   currentHp: number;
   armorClass: number;
-  conditions: Condition[];
+  conditions: string[];
   initiativeMod: number;
   initiativeTotal: number;
 }

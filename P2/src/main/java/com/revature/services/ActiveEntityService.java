@@ -1,12 +1,10 @@
 package com.revature.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.ActiveEntity;
-import com.revature.beans.Campaign;
 import com.revature.datalayer.ActiveEntityDAO;
 
 @Service
