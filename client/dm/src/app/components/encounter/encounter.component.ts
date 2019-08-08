@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Campaign } from 'src/app/models/Campaign';
 import { CampaignService } from 'src/app/services/campaign.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-encounter',
@@ -17,7 +18,8 @@ export class EncounterComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private campaignService: CampaignService
+    private campaignService: CampaignService,
+    private router: Router
   ) {  }
 
   entities = this.campaignService.currentCampaign.activeEntities;
@@ -35,16 +37,12 @@ export class EncounterComponent implements OnInit {
     entities.sort((a, b) => a.initiativeTotal > b.initiativeTotal ? -1 : a.initiativeTotal < b.initiativeTotal ? 1 : 0);
   }
 
-  addEffect(): any {
-    console.log('Effect Added');
-  }
-
-  removeEffect(): any {
-    console.log('Effrect Removed');
-  }
-
   openEntityModal(entityModal) {
     this.modalService.open(entityModal);
+  }
+
+  openMonsterModal(addMonsterModal) {
+    this.modalService.open(addMonsterModal);
   }
 
   onSelect(entity: Entity): void {
@@ -55,10 +53,9 @@ export class EncounterComponent implements OnInit {
     this.selectedEntity.currentHp = value;
   }
 
-  addMonster(): void {
+  addMonster(monster): void {
     if (this.turnNumber === 1) {
-      // tslint:disable-next-line: max-line-length
-    this.entities.push({id: 3, campaignId: 1, name: 'Monster', entityType: 'Monster', hp: 58, currentHp: 26, armorClass: 55, conditions: [], initiativeMod: 5, initiativeTotal: 46});
+    this.entities.push(monster);
     this.sortByInitiative(this.entities);
     }
   }
@@ -79,17 +76,22 @@ export class EncounterComponent implements OnInit {
   }
 
   endEncounter(): void {
-    console.log('End encounter and pass back to campaign');
+    this.router.navigate(['/campaign']);
   }
 
   getCurrentCampaign(): Campaign {
-    return new Campaign();
+    return this.campaignService.currentCampaign;
   }
 
   ngOnInit() {
-    this.sortByInitiative(this.entities);
-    this.setActiveEntity(this.turnNumber - 1);
-    this.getCurrentCampaign();
+    if (sessionStorage.getItem('currentUser')) {
+      this.sortByInitiative(this.entities);
+      this.setActiveEntity(this.turnNumber - 1);
+      this.getCurrentCampaign();
+    } else {
+      this.router.navigate(['/login']);
+    }
+   
   }
 
 }

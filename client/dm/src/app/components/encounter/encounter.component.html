@@ -26,7 +26,7 @@
               <app-active-entity [entity]="activeEntity"></app-active-entity>
               <button type="button" id="next" class="btn btn-outline-dark" (click)="passTurn()">Next Turn</button>
               <span *ngIf="turnNumber === 1">
-                <button type="button" id="addMonster" class="btn btn-outline-dark" (click)="addMonster()">Add Monster</button>
+                <button type="button" id="addMonster" class="btn btn-outline-dark" (click)="openMonsterModal()">Add Monster</button>
               </span>
               <form id="end">
                   <button type="button" class="btn btn-primary" (click)="saveEncounter()">Save Encounter</button>
@@ -63,7 +63,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <li *ngFor="let monster of monsters" (click)="selectMonster(monster)"></li>
+          <li *ngFor="let monster of monsters" (click)="addMonster(monster)"></li>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
