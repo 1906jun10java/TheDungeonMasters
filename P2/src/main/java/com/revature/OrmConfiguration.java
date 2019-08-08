@@ -27,7 +27,7 @@ public class OrmConfiguration {
 	public DataSource getDataSource() {
 		DriverManagerDataSource dsrc = new DriverManagerDataSource();
 		dsrc.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		dsrc.setUrl(System.getenv("REV_DB_URL"));
+		dsrc.setUrl("jdbc:oracle:thin:@june-10-java-eo.c472tpig8r7o.us-east-2.rds.amazonaws.com:1521:EOREVDB");
 		dsrc.setUsername(System.getenv("REV_DB_USERNAME"));
 		dsrc.setPassword(System.getenv("REV_DB_PASSWORD"));
 		return dsrc;
