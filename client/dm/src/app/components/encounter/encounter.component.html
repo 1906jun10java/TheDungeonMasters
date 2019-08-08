@@ -63,7 +63,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <li *ngFor="let monster of monsters" (click)="selectMonster(monster)"></li>
+          <li *ngFor="let monster of monsters" (click)="addMonster(monster)"></li>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
