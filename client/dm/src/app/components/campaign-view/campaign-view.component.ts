@@ -155,9 +155,8 @@ export class CampaignViewComponent implements OnInit {
   }
 
   deleteEntity(modal) {
-    this.entityService.deleteEntity(this.selectedEntity.id).subscribe(res => {
-      console.log(res);
-      if (res === 'deleted') {
+    this.entityService.deleteEntity(this.selectedEntity.id).then(res => {
+      if (res.status === 200) {
         this.getCampaigns();
       }
     });
