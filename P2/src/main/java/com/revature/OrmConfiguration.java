@@ -36,8 +36,8 @@ public class OrmConfiguration {
 	public Properties getHibernateProps() {
 		Properties props = new Properties();
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
-		props.setProperty("hibernate.show_sql", "false");
-		props.setProperty("spring.jpa.properties.hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+		props.setProperty("hibernate.show_sql", "true");
+		props.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle8iDialect");
 		return props;
 	}
 	

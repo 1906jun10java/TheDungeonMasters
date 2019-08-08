@@ -23,7 +23,7 @@ export class EncounterComponent implements OnInit {
   ) {  }
 
   entities = this.campaignService.currentCampaign.activeEntities;
-
+  monsters = this.getMonsters();
   selectedEntity: Entity;
   activeEntity: Entity;
   roundNumber = 1;
@@ -51,6 +51,14 @@ export class EncounterComponent implements OnInit {
 
   updateEntity(value: number): void {
     this.selectedEntity.currentHp = value;
+  }
+
+  getMonsters(): any {
+    this.entities.forEach(entity => {
+      if (this.entity.entityType === 'monster') {
+        this.monsters.push(entity);
+      }
+    });
   }
 
   addMonster(monster): void {
