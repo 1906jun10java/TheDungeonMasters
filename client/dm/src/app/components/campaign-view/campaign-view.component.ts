@@ -153,4 +153,14 @@ export class CampaignViewComponent implements OnInit {
     });
     modal.close();
   }
+
+  deleteEntity(modal) {
+    this.entityService.deleteEntity(this.selectedEntity.id).subscribe(res => {
+      console.log(res);
+      if (res === 'deleted') {
+        this.getCampaigns();
+      }
+    });
+    modal.close();
+  }
 }

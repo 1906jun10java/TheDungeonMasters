@@ -22,8 +22,15 @@ export class EntityService {
 
   saveEntity(entity) {
     return this.http.post(
-      apiUrl + '/saveEntities',
-      entity, httpOptions
+      apiUrl + '/saveEntities', entity, httpOptions
+    ).pipe(map(res => {
+      return res;
+    }));
+  }
+
+  deleteEntity(entityId) {
+    return this.http.post(
+      apiUrl + '/delete/' + entityId, {responseType: 'text' as 'json'}
     ).pipe(map(res => {
       return res;
     }));

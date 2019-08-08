@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  gotoRegistration(){
+  gotoRegistration() {
     this.router.navigate(['/registration']);
   }
 }
