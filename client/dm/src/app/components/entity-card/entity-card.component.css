@@ -1,5 +1,5 @@
 .card {
-  width: 12em;
+  min-width: 10em;
   background-color: #f8f9fa;
   text-align: center;
 }
