@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -83,6 +84,18 @@ public class CampaignController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp = new ResponseEntity<String>("Failed to update.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return resp;
+	}
+	
+	@DeleteMapping(value="/delete/{id}")
+	public ResponseEntity<String> deleteCampaignById(@PathVariable("id") int id){
+		ResponseEntity<String> resp = null;
+		try {
+			cs.deleteCampaignById(id);
+			resp = new ResponseEntity<String>("Campaign deleted.", HttpStatus.OK);
+		} catch (Exception e) {
+			resp = new ResponseEntity<String>("Failure.", HttpStatus.EXPECTATION_FAILED);
 		}
 		return resp;
 	}

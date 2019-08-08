@@ -48,7 +48,7 @@ public class Campaign {
 	@Column(name = "USER_ID")
 	private int userId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
 	@JoinColumn(name = "CAMPAIGN_ID")
 	List<ActiveEntity> activeEntities;
 	
