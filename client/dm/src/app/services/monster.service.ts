@@ -30,7 +30,6 @@ export class MonsterService {
   }
 
   relayMonster(monster){
-    console.log(monster);
     this.sendMonster.emit(monster);
   }
 
