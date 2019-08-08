@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Entity } from 'src/app/models/Entity';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +41,10 @@ export class EncounterComponent implements OnInit {
     this.modalService.open(entityModal);
   }
 
+  openMonsterModal(addMonsterModal) {
+    this.modalService.open(addMonsterModal);
+  }
+
   onSelect(entity: Entity): void {
   this.selectedEntity = entity;
 }
@@ -51,7 +55,6 @@ export class EncounterComponent implements OnInit {
 
   addMonster(monster): void {
     if (this.turnNumber === 1) {
-      // tslint:disable-next-line: max-line-length
     this.entities.push(monster);
     this.sortByInitiative(this.entities);
     }
