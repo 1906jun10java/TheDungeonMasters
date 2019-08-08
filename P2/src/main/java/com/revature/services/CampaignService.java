@@ -59,5 +59,9 @@ public class CampaignService {
 	public void updateCampaign(Campaign c) {
 		cDAO.updateCampaign(c);
 	}
+	
+	public void deleteCampaignById(int id) {
+		cDAO.deleteCampaignById(id);
+	}
 
 }
