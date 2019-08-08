@@ -39,6 +39,15 @@ export class CampaignService {
     }));
   }
 
+  deleteCampaign(campaignId) {
+    return fetch(apiUrl + 'delete/' + campaignId, {
+      method: 'POST',
+      body: null
+    }).then(res => {
+      return res;
+    });
+  }
+
   setCurrentCampaign(campaign: Campaign) {
     this.currentCampaign = campaign;
   }
