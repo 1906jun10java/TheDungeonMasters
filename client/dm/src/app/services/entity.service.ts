@@ -29,10 +29,11 @@ export class EntityService {
   }
 
   deleteEntity(entityId) {
-    return this.http.post(
-      apiUrl + '/delete/' + entityId, {responseType: 'text' as 'json'}
-    ).pipe(map(res => {
+    return fetch(apiUrl + '/delete/' + entityId, {
+      method: 'POST',
+      body: null
+    }).then(res => {
       return res;
-    }));
+    });
   }
 }
