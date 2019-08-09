@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,8 @@ export class NavComponent implements OnInit {
   links: {};
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -20,6 +22,6 @@ export class NavComponent implements OnInit {
     this.authService.currentUser = null;
     this.authService.isLoggedIn = false;
     sessionStorage.clear();
-    window.location.replace('/login');
+    this.router.navigate(['/login']);
   }
 }
