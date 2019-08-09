@@ -17,6 +17,7 @@ export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaignId: number;
   currentCampaignName: string;
+  monsterVault: Entity[];
   conditions: string[] = null;
   activePlayers: Entity[] = [];
   activeMonsters: Entity[] = [];
@@ -37,6 +38,7 @@ export class CampaignViewComponent implements OnInit {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
       this.getConditions();
+      this.getMonsterVault();
     } else {
       this.router.navigate(['/login']);
     }
@@ -76,6 +78,14 @@ export class CampaignViewComponent implements OnInit {
     this.statusService.getConditions().subscribe(conditions => {
       if (conditions) {
         this.conditions = conditions;
+      }
+    });
+  }
+
+  getMonsterVault() {
+    this.entityService.loadMonsterVault().subscribe(monsters => {
+      if (monsters) {
+        this.monsterVault = monsters;
       }
     });
   }
