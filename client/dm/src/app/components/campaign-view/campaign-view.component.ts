@@ -16,9 +16,11 @@ import {StatusService} from '../../services/status.service';
 export class CampaignViewComponent implements OnInit {
   campaigns: Campaign[] = null;
   currentCampaignId: number;
+  currentCampaignName: string;
+  monsterVault: Entity[];
   conditions: string[] = null;
-  activePlayers: Entity[] = null;
-  activeMonsters: Entity[] = null;
+  activePlayers: Entity[] = [];
+  activeMonsters: Entity[] = [];
   newEntity: Entity;
   selectedEntity: Entity;
   newCampaign: Campaign;
@@ -36,6 +38,7 @@ export class CampaignViewComponent implements OnInit {
     if (sessionStorage.getItem('currentUser')) {
       this.getCampaigns();
       this.getConditions();
+      this.getMonsterVault();
     } else {
       this.router.navigate(['/login']);
     }
@@ -44,18 +47,29 @@ export class CampaignViewComponent implements OnInit {
   getCampaigns() {
     const userId = this.authService.getCurrentUserValue().userId;
     this.campaignService.getCampaignsByUser(userId).subscribe(campaigns => {
-      if (campaigns) {
+      if (campaigns.length > 0) {
         this.campaigns = campaigns;
         if (this.currentCampaignId) {
+          if (campaigns.length === 0) {
+            this.setCurrentCampaign(null);
+            return;
+          }
           this.campaigns.forEach(c => {
             if (c.campaignId === this.currentCampaignId) {
-              this.setCurrentCampaignId(c);
+              this.setCurrentCampaign(c);
             }
           });
         } else {
-          this.currentCampaignId = this.campaigns[0].campaignId;
-          this.setCurrentCampaignId(this.campaigns[0]);
+          if (this.campaigns[0]) {
+            this.currentCampaignId = this.campaigns[0].campaignId;
+            this.setCurrentCampaign(this.campaigns[0]);
+          } else {
+            this.setCurrentCampaign(null);
+          }
         }
+      } else {
+        this.campaigns = [];
+        this.setCurrentCampaign(null);
       }
     });
   }
@@ -64,6 +78,14 @@ export class CampaignViewComponent implements OnInit {
     this.statusService.getConditions().subscribe(conditions => {
       if (conditions) {
         this.conditions = conditions;
+      }
+    });
+  }
+
+  getMonsterVault() {
+    this.entityService.loadMonsterVault().subscribe(monsters => {
+      if (monsters) {
+        this.monsterVault = monsters;
       }
     });
   }
@@ -82,14 +104,21 @@ export class CampaignViewComponent implements OnInit {
     });
   }
 
-  setCurrentCampaignId(campaign: Campaign) {
-    this.campaigns.forEach(c => {
-      if (c.campaignId === campaign.campaignId) {
-        this.currentCampaignId = campaign.campaignId;
-        this.campaignService.setCurrentCampaign(campaign);
-        this.parseEntities(campaign);
-      }
-    });
+  setCurrentCampaign(campaign: Campaign) {
+    if (campaign === null) {
+      this.currentCampaignName = '';
+      this.currentCampaignId = null;
+      this.campaignService.setCurrentCampaign(null);
+    } else {
+      this.campaigns.forEach(c => {
+        if (c.campaignId === campaign.campaignId) {
+          this.currentCampaignId = campaign.campaignId;
+          this.currentCampaignName = campaign.campaignName;
+          this.campaignService.setCurrentCampaign(campaign);
+          this.parseEntities(campaign);
+        }
+      });
+    }
   }
 
   openAddCampaignModal(addCampaignModal) {
@@ -102,10 +131,9 @@ export class CampaignViewComponent implements OnInit {
 
   saveNewCampaign(modal) {
     const json = JSON.stringify(this.newCampaign);
-    console.log(json);
     this.campaignService.saveCampaign(json).subscribe(res => {
       if (res === 'Added Campaign: ' + this.newCampaign.campaignName) {
-        this.campaigns.push(this.newCampaign);
+        this.getCampaigns();
       }
     });
     modal.close();
@@ -155,11 +183,25 @@ export class CampaignViewComponent implements OnInit {
   }
 
   deleteEntity(modal) {
-    this.entityService.deleteEntity(this.selectedEntity.id).then(res => {
+    this.entityService.deleteEntity(this.selectedEntity.id)
+    .then(res => {
       if (res.status === 200) {
         this.getCampaigns();
       }
     });
     modal.close();
+  }
+
+  deleteCampaign() {
+    if (this.currentCampaignId) {
+      this.campaignService.deleteCampaign(this.currentCampaignId)
+      .then(res => {
+        if (res.status === 200) {
+          this.activeMonsters = [];
+          this.activePlayers = [];
+          this.getCampaigns();
+        }
+      });
+    }
   }
 }

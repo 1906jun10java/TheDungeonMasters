@@ -5,20 +5,6 @@
       <nav class="col-md-2 d-none d-md-block bg-light sidebar">
         <div class="sidebar-sticky">
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Entities</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-              <span data-feather="plus-circle"></span>
-            </a>
-          </h6>
-          <ul class="nav flex-column">
-            <li *ngIf="activePlayers && activePlayers.length < 5" class="nav-item">
-              <a class="nav-link" [routerLink]="" (click)="openAddPlayerModal(addEntityModal)">Add Player</a>
-            </li>
-            <li *ngIf="activeMonsters && activeMonsters.length < 10" class="nav-item">
-              <a class="nav-link" [routerLink]="" (click)="openAddMonsterModal(addEntityModal)">Add Monster</a>
-            </li>
-          </ul>
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Campaign</span>
             <a class="d-flex align-items-center text-muted" href="#">
               <span data-feather="plus-circle"></span>
@@ -28,11 +14,25 @@
             <li class="nav-item">
               <a class="nav-link" [routerLink]="" (click)="openAddCampaignModal(addCampaignModal)">New</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="">Remove</a>
+            <li *ngIf="currentCampaignId" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="deleteCampaign()">Delete</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/encounter">Play</a>
+              <a *ngIf="currentCampaignId" class="nav-link" routerLink="/encounter">Play</a>
+            </li>
+          </ul>
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Entities</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul *ngIf="currentCampaignId" class="nav flex-column">
+            <li *ngIf="activePlayers && activePlayers.length < 5" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="openAddPlayerModal(addEntityModal)">Add Player</a>
+            </li>
+            <li *ngIf="activeMonsters && activeMonsters.length < 10" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="openAddMonsterModal(addEntityModal)">Add Monster</a>
             </li>
           </ul>
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -43,14 +43,16 @@
           </h6>
           <ul class="nav flex-column">
             <li *ngFor="let campaign of campaigns">
-              <a class="nav-link" (click)="setCurrentCampaignId(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
+              <a class="nav-link" (click)="setCurrentCampaign(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
             </li>
           </ul>
         </div>
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <h2>Players:</h2>
+        <h2>{{ currentCampaignName }}</h2>
+        <hr/>
+        <h4>Players:</h4>
         <div *ngIf="activePlayers && activePlayers.length > 0">
           <div *ngFor="let entity of activePlayers; let i = index">
             <div class="row justify-content-start" *ngIf="i%5 === 0">
@@ -73,7 +75,7 @@
           </div>
         </div>
         <br/>
-        <h2>Monsters:</h2>
+        <h4>Monsters:</h4>
         <div *ngIf="activeMonsters && activeMonsters.length > 0">
           <div *ngFor="let entity of activeMonsters; let i = index">
             <div class="row justify-content-start" *ngIf="i%5 === 0">

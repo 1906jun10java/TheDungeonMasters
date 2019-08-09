@@ -1,26 +1,18 @@
 package com.revature.controllers;
 
-import java.io.StringReader;
-import java.util.List;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-
+import com.revature.beans.Campaign;
+import com.revature.services.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import com.revature.beans.Campaign;
-import com.revature.services.CampaignService;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
+import java.util.List;
 
 @Controller
 @RequestMapping("/campaigns")
@@ -87,9 +79,9 @@ public class CampaignController {
 		}
 		return resp;
 	}
-	
-	@DeleteMapping(value="/delete/{id}")
-	public ResponseEntity<String> deleteCampaignById(@PathVariable("id") int id){
+
+	@PostMapping(value="/delete/{id}")
+	public ResponseEntity<String> deleteCampaignById(@PathVariable("id") int id) {
 		ResponseEntity<String> resp = null;
 		try {
 			cs.deleteCampaignById(id);
@@ -99,5 +91,4 @@ public class CampaignController {
 		}
 		return resp;
 	}
-	
 }

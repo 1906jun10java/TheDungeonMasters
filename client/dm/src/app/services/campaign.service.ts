@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 // Base URL
+// const apiUrl = 'http://ec2-18-223-30-39.us-east-2.compute.amazonaws.com:8089/P2/campaigns/';
 const apiUrl = 'http://localhost:8080/P2/campaigns/';
 
 // HTTP options
@@ -46,6 +47,15 @@ export class CampaignService {
     ).pipe(map(res => {
       return res;
     }));
+  }
+
+  deleteCampaign(campaignId) {
+    return fetch(apiUrl + 'delete/' + campaignId, {
+      method: 'POST',
+      body: null
+    }).then(res => {
+      return res;
+    });
   }
 
   setCurrentCampaign(campaign: Campaign) {
