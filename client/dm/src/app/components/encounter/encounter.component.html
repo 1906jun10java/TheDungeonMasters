@@ -16,7 +16,7 @@
                   </button>
                 </li>
               </ul>
-             
+
             </div>
           </nav>
           <main role="main">
@@ -58,7 +58,7 @@
 
     <ng-template #addMonsterModal let-c="close" let-d="dismiss">
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Monster Vault </h4>
+          <h4 class="modal-title" id="addMonsterModal">Monster Vault </h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -76,14 +76,13 @@
 
       <ng-template #conditionModal let-c="close" let-d="dismiss">
           <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">{{activeEntity.conditions[0]}} </h4>
+            <h4 class="modal-title" id="conditionModal">{{activeEntity.conditions[0]}} </h4>
           </div>
           <div class="modal-body">
             Is {{activeEntity.name}} still {{activeEntity.conditions[0]}}?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-dark" (click)="passTurn()" (click)="c('Save click')">Yes</button>
-            <button type="button" class="btn btn-outline-dark" (click)="removeCondition(condition, activeEntity)" (click)="c('Save click')">No</button>
+<!--            <button type="button" class="btn btn-outline-dark" (click)="removeCondition(condition, activeEntity)" (click)="c('Save click')">No</button>-->
           </div>
         </ng-template>
-  
