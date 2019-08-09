@@ -2,9 +2,9 @@
     <div class="text-center mb-4">
         <h5>New User Registration</h5>
     </div>
-    <span class="text-center mb-5" *ngIf="hadError" style="color: red">
-        <h4>Some error occurred, check your formatting.</h4>
-    </span>
+    <div class="text-center mb-5" *ngIf="hadError" style="color: red">
+        <h4>{{errorMessage}}</h4>
+    </div>
     <div class="form-label-group">
         <input type="email" class="form-control" formControlName="email" placeholder="Email" required autofocus>
     </div>

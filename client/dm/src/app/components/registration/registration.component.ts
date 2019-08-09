@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  errorMessage: string = 'red text';
   hadError: boolean = false;
   showPass: boolean = false;
 
@@ -38,6 +39,7 @@ export class RegistrationComponent implements OnInit {
       if(response == 'New User registered, congratulations, nerd.'){
         this.router.navigate(['/login']);
       } else {
+        this.errorMessage = response;
         this.hadError = true;
       }
     });
