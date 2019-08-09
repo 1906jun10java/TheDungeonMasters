@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Entity } from 'src/app/models/Entity';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Campaign } from 'src/app/models/Campaign';
-import { CampaignService } from 'src/app/services/campaign.service';
-import { Router } from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {Entity} from 'src/app/models/Entity';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Campaign} from 'src/app/models/Campaign';
+import {CampaignService} from 'src/app/services/campaign.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-encounter',
@@ -67,10 +66,21 @@ export class EncounterComponent implements OnInit {
   }
 
   addMonster(monster): void {
+    let newMonster = new Entity();
+    newMonster = {id: 1, campaignId: monster.campaignId,
+      name: monster.name, entityType: monster.entityType,
+      hp: monster.hp, currentHp: monster.hp, armorClass: monster.armorClass,
+      conditions: [], initiativeMod: monster.initiativeMod, initiativeTotal: monster.initiativeMod + this.getRandomInt(1,20)};
     if (this.turnNumber === 1) {
-    this.entities.push(monster);
+    this.entities.push(newMonster);
     this.sortByInitiative(this.entities);
     }
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
   checkConditions(entity, conditionModal): void {
@@ -126,7 +136,7 @@ export class EncounterComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
-   
+
   }
 
 }
