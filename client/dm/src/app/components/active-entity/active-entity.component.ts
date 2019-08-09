@@ -13,6 +13,7 @@ export class ActiveEntityComponent implements OnInit {
 
   updateEntity(value: number): void {
     this.entity.currentHp = value;
+    console.log(this.entity);
   }
 
   constructor() { }

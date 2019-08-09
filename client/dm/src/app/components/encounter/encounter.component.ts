@@ -4,6 +4,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Campaign} from 'src/app/models/Campaign';
 import {CampaignService} from 'src/app/services/campaign.service';
 import {Router} from '@angular/router';
+import { EntityService } from 'src/app/services/entity.service';
 
 @Component({
   selector: 'app-encounter',
@@ -18,7 +19,8 @@ export class EncounterComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private campaignService: CampaignService,
-    private router: Router
+    private router: Router,
+    private entityService: EntityService
   ) {  }
 
   entities = this.campaignService.currentCampaign.activeEntities;
@@ -67,14 +69,16 @@ export class EncounterComponent implements OnInit {
 
   addMonster(monster): void {
     let newMonster = new Entity();
-    newMonster = {id: 1, campaignId: monster.campaignId,
+    newMonster = {id: this.getRandomInt(1000, 1000000000), campaignId: monster.campaignId,
       name: monster.name, entityType: monster.entityType,
       hp: monster.hp, currentHp: monster.hp, armorClass: monster.armorClass,
       conditions: [], initiativeMod: monster.initiativeMod, initiativeTotal: monster.initiativeMod + this.getRandomInt(1,20)};
     if (this.turnNumber === 1) {
-    this.entities.push(newMonster);
-    this.sortByInitiative(this.entities);
+      this.entities.push(newMonster);
+      const json = JSON.stringify(newMonster);
+      this.entityService.saveEntity(json);
     }
+      this.sortByInitiative(this.entities);
   }
 
   getRandomInt(min, max) {
@@ -102,14 +106,32 @@ export class EncounterComponent implements OnInit {
     if (this.turnNumber === this.entities.length) {
       this.roundNumber += 1;
       this.turnNumber = 1;
+      const json = JSON.stringify(this.campaignService.currentCampaign);
+      console.log(json);
+      this.campaignService.updateCampaign(json).subscribe(res => {
+      if (res === 'Added Campaign: ' + this.campaignService.currentCampaign) {
+        console.log("Save Success");
+      }
+    });
       this.setActiveEntity(this.turnNumber - 1);
     } else {
       this.turnNumber += 1;
+      const json = JSON.stringify(this.campaignService.currentCampaign);
+      console.log(json);
+      this.campaignService.updateCampaign(json).subscribe(res => {
+      if (res === 'Added Campaign: ' + this.campaignService.currentCampaign) {
+        console.log("Save Success");
+      }
+    });
       this.setActiveEntity(this.turnNumber - 1);
     }
   }
 
   endEncounter(): void {
+    this.entities.forEach(entity => {
+      const json = JSON.stringify(entity);
+      this.entityService.saveEntity(json);
+    });
     this.router.navigate(['/campaign']);
   }
 
