@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Base URL
 // const apiUrl = 'http://ec2-18-223-30-39.us-east-2.compute.amazonaws.com:8089/P2/register';
@@ -18,8 +18,8 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   addNewUser(data){
-    return this.http.post<any>(
-      url, data, httpHeaders,
-    );
+    return this.http.post<string>(
+    url, data, httpHeaders,
+    )
   }
 }

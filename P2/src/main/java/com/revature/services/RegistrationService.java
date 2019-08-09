@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Credentials;
 import com.revature.beans.User;
 import com.revature.datalayer.LoginDAO;
+import com.revature.util.EmailTakenException;
+import com.revature.util.NullFieldException;
 
 @Service
 public class RegistrationService {
@@ -20,7 +22,7 @@ public class RegistrationService {
 	}
 	
 	//Split our form data into a new user and a new credentials object
-	public boolean addNewUser(JsonObject body) {
+	public void addNewUser(JsonObject body) throws NullFieldException, EmailTakenException{
 		System.out.println(body);
 		User temp = new User();
 		Credentials creds = new Credentials();
@@ -28,18 +30,16 @@ public class RegistrationService {
 		temp.setFirstName(body.getString("firstName"));
 		temp.setEmail(body.getString("email"));
 		if(temp.getEmail().isEmpty()) {
-			return false;
+			throw new NullFieldException("Email field is empty!");
 		}
 		creds.setUser(temp);
 		creds.setPassword(body.getString("password"));
 		if(creds.getPassword().isEmpty()) {
-			return false;
+			throw new NullFieldException("Password field is empty!");
 		}
 		if(ld.getUserByEmail(temp.getEmail()) != null) {
-			System.out.println(ld.getUserByEmail(temp.getEmail()));
-			return false;
+			throw new EmailTakenException("Email already in use.");
 		}
 		ld.createUser(temp, creds);
-		return true;
 	}
 }

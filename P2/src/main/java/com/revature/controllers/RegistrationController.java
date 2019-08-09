@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.revature.services.RegistrationService;
+import com.revature.util.EmailTakenException;
+import com.revature.util.NullFieldException;
 
 @Controller
 @RequestMapping("/register")
@@ -30,18 +32,17 @@ public class RegistrationController {
 	@PostMapping
 	public ResponseEntity<String> addNewUser(@RequestBody String rawJson){
 		ResponseEntity<String> response = null;
+		response = new ResponseEntity<>("New User registered, congratulations, nerd.", HttpStatus.CREATED);
 		JsonReader jsonReader = Json.createReader(new StringReader(rawJson));
 		JsonObject json = jsonReader.readObject();
 		jsonReader.close();
 		try {
-			if(!rs.addNewUser(json)) {
-				System.out.println("The email or password fields were null, don't panic."); //custom exception maybe
-				throw new Exception();
-			}
-			response = new ResponseEntity<>("New User registered, congratulations, nerd.", HttpStatus.OK);
-		}catch(Exception e){
+			rs.addNewUser(json);
+		} catch (NullFieldException | EmailTakenException e) {
+			response = new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+		} catch (Exception e) {
 			e.printStackTrace();
-			response = new ResponseEntity<>("Could not add new user.", HttpStatus.INTERNAL_SERVER_ERROR);
+			response = new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}
