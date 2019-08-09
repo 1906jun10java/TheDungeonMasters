@@ -23,7 +23,7 @@ export class EncounterComponent implements OnInit {
   ) {  }
 
   entities = this.campaignService.currentCampaign.activeEntities;
-  monsters = this.getMonsters();
+  monsters: Entity[] = [];
   selectedEntity: Entity;
   activeEntity: Entity;
   roundNumber = 1;
@@ -45,6 +45,10 @@ export class EncounterComponent implements OnInit {
     this.modalService.open(addMonsterModal);
   }
 
+  openConditionModal(conditionModal) {
+    this.modalService.open(conditionModal);
+  }
+
   onSelect(entity: Entity): void {
   this.selectedEntity = entity;
 }
@@ -55,10 +59,11 @@ export class EncounterComponent implements OnInit {
 
   getMonsters(): any {
     this.entities.forEach(entity => {
-      if (this.entity.entityType === 'monster') {
+      if (entity.entityType === "monster") {
         this.monsters.push(entity);
       }
     });
+    console.log(this.monsters);
   }
 
   addMonster(monster): void {
@@ -66,6 +71,21 @@ export class EncounterComponent implements OnInit {
     this.entities.push(monster);
     this.sortByInitiative(this.entities);
     }
+  }
+
+  checkConditions(entity, conditionModal): void {
+    if (entity.conditions === []) {
+      this.passTurn();
+    }
+    if (entity.conditions) {
+      this.openConditionModal(conditionModal);
+    } else {
+      this.passTurn();
+    }
+  }
+
+  removeCondition(condition, entity) {
+    entity.conditions.splice(condition, 1);
   }
 
   passTurn(): void {
@@ -79,16 +99,23 @@ export class EncounterComponent implements OnInit {
     }
   }
 
-  saveEncounter(): void {
-    console.log('Saved the campaign');
-  }
-
   endEncounter(): void {
     this.router.navigate(['/campaign']);
   }
 
   getCurrentCampaign(): Campaign {
     return this.campaignService.currentCampaign;
+  }
+
+  saveCampaign() {
+    const json = JSON.stringify(this.campaignService.currentCampaign);
+    console.log(json);
+    this.campaignService.updateCampaign(json).subscribe(res => {
+      if (res === 'Added Campaign: ' + this.campaignService.currentCampaign) {
+        console.log("Save Success");
+      }
+    });
+    this.router.navigate(['/campaign']);
   }
 
   ngOnInit() {

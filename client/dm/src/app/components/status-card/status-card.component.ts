@@ -21,7 +21,11 @@ export class StatusCardComponent implements OnInit {
 
  ngOnInit() {
    this.getConditions();
+   if (!this.entity.conditions) {
+    this.entity.conditions = [];
+   }
  }
+
 
  getConditions() {
   this.statusService.getConditions().subscribe(conditions => {
@@ -29,9 +33,10 @@ export class StatusCardComponent implements OnInit {
 }
 
   toggleCondition(condition, entity) {
-    if (entity.conditions.includes(condition)) {
-      entity.conditions.splice(entity.conditions.indexOf(condition), 1);
-    } else {
+    // if (entity.conditions.includes(condition)) {
+    //   entity.conditions.splice(entity.conditions.indexOf(condition), 1);
+    // } else {
+    if (!entity.conditions.includes(condition)) {
       entity.conditions.push(condition);
     }
     console.log(entity);

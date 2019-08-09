@@ -40,6 +40,15 @@ export class CampaignService {
     }));
   }
 
+  updateCampaign(campaign) {
+    return this.http.post(
+      apiUrl + '/update',
+      campaign, httpOptions
+    ).pipe(map(res => {
+      return res;
+    }));
+  }
+
   deleteCampaign(campaignId) {
     return fetch(apiUrl + 'delete/' + campaignId, {
       method: 'POST',
