@@ -63,7 +63,7 @@ public class CampaignController {
 	}
 	
 	//Use this when updating a campaign's state (should include attached entities)
-	@PutMapping(value="/update")
+	@PostMapping(value="/update")
 	public ResponseEntity<String> updateCampaign(@RequestBody Campaign c) {
 		ResponseEntity<String> resp = null;
 		//Might need to call AE service to add all Entities
