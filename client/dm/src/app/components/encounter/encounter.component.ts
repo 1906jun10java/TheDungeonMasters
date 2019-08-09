@@ -67,10 +67,21 @@ export class EncounterComponent implements OnInit {
   }
 
   addMonster(monster): void {
+    let newMonster = new Entity();
+    newMonster = {id: 1, campaignId: monster.campaignId,
+      name: monster.name, entityType: monster.entityType,
+      hp: monster.hp, currentHp: monster.hp, armorClass: monster.armorClass,
+      conditions: [], initiativeMod: monster.initiativeMod, initiativeTotal: monster.initiativeMod + this.getRandomInt(1,20)};
     if (this.turnNumber === 1) {
-    this.entities.push(monster);
+    this.entities.push(newMonster);
     this.sortByInitiative(this.entities);
     }
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
 
   checkConditions(entity, conditionModal): void {
