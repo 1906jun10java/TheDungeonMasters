@@ -42,7 +42,6 @@ export class CampaignViewComponent implements OnInit {
       this.router.navigate(['/login']);
     }
     this.monsterService.sendMonster.subscribe(monster => {
-      console.log(monster);
       this.activeMonsters.push(monster);
     });
   }
